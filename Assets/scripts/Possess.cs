@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Possess : MonoBehaviour
 {
+    private bool inRange = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,13 +17,27 @@ public class Possess : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.R))
         {
-            
+            if (inRange)
+            {
+                Debug.Log("Possessed");
+                
+            }
         }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(transform.parent && transform.parent.gameObject != other.gameObject)
-            Debug.Log (transform.parent.gameObject.name + ": I can see " + other.gameObject.tag);
+        {
+            if (other.CompareTag("NPC"))
+            {
+                inRange = true;
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        inRange = false;
     }
 }
