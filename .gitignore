@@ -3,4 +3,6 @@
 /Library/
 /Packages/
 /Temp/
-
+/UserSettings/Layout/
+/obj/
+/Assets/scripts/.idea
