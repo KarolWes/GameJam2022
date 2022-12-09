@@ -309,3 +309,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68870edf17531394080e5b96608f4c63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  size: 1
+  possessionDelay: 0.5
+  player: {fileID: 8487342012688875612}
