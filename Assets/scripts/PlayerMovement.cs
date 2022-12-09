@@ -4,16 +4,12 @@ using UnityEngine;
 
 public class PlayerMovement : PhysicsObject
 {
+    protected Vector2 Pos;
     
-
-    private Vector2 _pos;
-
-    private Vector2 _goal = Vector2.zero;
     // Start is called before the first frame update
     void Start()
     {
-        _pos = transform.position;
-        _goal = _pos;
+        Pos = transform.position;
     }
 
     // Update is called once per frame

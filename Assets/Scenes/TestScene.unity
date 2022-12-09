@@ -855,6 +855,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: b1570b52d5b807543bc356061656ef8a, type: 3}
+--- !u!1 &2111801832 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8487342012688875612, guid: 27c9c0a064cfe2842a055f3843ab3360, type: 3}
+  m_PrefabInstance: {fileID: 8487342012867575769}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2551683809651925782
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1092,6 +1097,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8487342013246457766, guid: 27c9c0a064cfe2842a055f3843ab3360, type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0.31764707
+      objectReference: {fileID: 0}
+    - target: {fileID: 8487342013246457766, guid: 27c9c0a064cfe2842a055f3843ab3360, type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0.31764707
+      objectReference: {fileID: 0}
+    - target: {fileID: 8487342013246457766, guid: 27c9c0a064cfe2842a055f3843ab3360, type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0.31764707
+      objectReference: {fileID: 0}
+    - target: {fileID: 8487342013397588995, guid: 27c9c0a064cfe2842a055f3843ab3360, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 2111801832}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 27c9c0a064cfe2842a055f3843ab3360, type: 3}
