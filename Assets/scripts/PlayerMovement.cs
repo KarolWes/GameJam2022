@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : PhysicsObject
 {
-    [SerializeField] private int spaceDelta = 5;
+    
 
     private Vector2 _pos;
 
@@ -18,20 +18,23 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    
+    protected override void ComputeVelocity()
     {
-        if (Input.GetKey(KeyCode.D))
+        Vector2 move = Vector2.zero;
+        move.x = Input.GetAxis("Horizontal"); // arrows or a-d
+        if (Input.GetButtonDown("Jump") && Grounded) // space or w
         {
-            _goal.x += spaceDelta;
+            Velocity.y = jumpSpeed;
+        }
+        else if (Input.GetButtonUp("Jump"))
+        {
+            if (Velocity.y > 0)
+            {
+                Velocity.y = Velocity.y * .5f;
+            }
         }
 
-        if (Input.GetKey(KeyCode.A))
-        {
-            _goal.x -= spaceDelta;
-        }
-
-        _pos = Vector2.MoveTowards(_pos, _goal, Time.deltaTime);
-        transform.position = _pos;
-        _goal = _pos;
+        TargetVelocity = move * speed;
     }
 }
