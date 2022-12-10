@@ -2333,6 +2333,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8487342012688875604, guid: 27c9c0a064cfe2842a055f3843ab3360, type: 3}
+      propertyPath: minGroundNormY
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8487342012688875612, guid: 27c9c0a064cfe2842a055f3843ab3360, type: 3}
       propertyPath: m_Name
       value: Player
@@ -2978,9 +2982,9 @@ PolygonCollider2D:
       - {x: -0.61563015, y: 1.4385377}
       - {x: -0.78783464, y: 1.1539828}
       - {x: -0.8143592, y: 0.51616555}
-      - {x: -0.872655, y: 0.32208398}
-      - {x: -0.93717265, y: 0.24851012}
-      - {x: -1.083468, y: -0.5271083}
+      - {x: -0.7606297, y: 0.37300447}
+      - {x: -0.85570025, y: 0.26887846}
+      - {x: -0.9205222, y: -0.6900538}
       - {x: -1.2495124, y: -0.715677}
       - {x: -1.2214365, y: -0.8861313}
       - {x: -0.56933063, y: -0.83977497}

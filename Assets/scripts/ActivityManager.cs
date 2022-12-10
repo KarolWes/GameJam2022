@@ -1,5 +1,7 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class ActivityManager : MonoBehaviour
 {
@@ -9,6 +11,7 @@ public class ActivityManager : MonoBehaviour
     private PossessedMovement _controller;
     private GameObject _candidate;
     private Stats _stats;
+    [SerializeField] private bool isPlayer = false;
 
     
     // Start is called before the first frame update
@@ -26,22 +29,26 @@ public class ActivityManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(_candidate);
-        if (_controller._active)
+        if (_controller._active || isPlayer)
         {
+            
             if (Input.GetKey(KeyCode.E) && Time.time > _nextActivity)
             {
                 
                 _nextActivity = Time.time + activityDelay;
-                if (_candidate.CompareTag("Takable"))
+                if(!isPlayer)
                 {
-                    Debug.Log("takeing");
-                    _stats.Inventory.Add(_candidate);
-                    _candidate.GetComponent<ItemManager>().Activate();
+                    if (_candidate.CompareTag("Takable"))
+                    {
+                        Debug.Log("takeing");
+                        _stats.Inventory.Add(_candidate);
+                        _candidate.GetComponent<ItemManager>().Activate();
+                    }
                 }
 
                 if (_candidate.CompareTag("Door"))
                 {
+                    Debug.Log("in");
                     if (_candidate.GetComponent<DoorController>().Open)
                     {
                         Debug.Log("You finished the level");
@@ -49,8 +56,11 @@ public class ActivityManager : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("opening"); 
-                        Debug.Log(_candidate.GetComponent<ActivateByItem>().Activate(_stats.Inventory));
+                        if(!isPlayer)
+                        {
+                            Debug.Log("opening");
+                            Debug.Log(_candidate.GetComponent<ActivateByItem>().Activate(_stats.Inventory));
+                        }
                     }
                     
                 }

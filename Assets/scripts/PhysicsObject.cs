@@ -18,14 +18,18 @@ public class PhysicsObject : MonoBehaviour
     protected List<RaycastHit2D> HitBufferList = new List<RaycastHit2D>(16);
     protected bool Grounded = false;
     protected Vector2 GroundNorm;
+    private Vector2 movement = new Vector2(1,1);
+    private Vector2 speedVec;
 
     public float gravityModifier = 0.5f;
     public float minGroundNormY = 0.65f;
 
 
+    
     protected void OnEnable()
     {
         RBody = GetComponent<Rigidbody2D>();
+        speedVec = new Vector2(speed, jumpSpeed);
     }
 
     // Start is called before the first frame update
@@ -41,6 +45,16 @@ public class PhysicsObject : MonoBehaviour
     {
         TargetVelocity = Vector2.zero;
         ComputeVelocity();
+        // float inputX = Input.GetAxis ("Horizontal");
+        // float inputY = Input.GetAxis ("Vertical");
+        //
+        // movement = new Vector2(
+        //     speedVec.x * inputX,
+        //     speedVec.y * inputY);
+        //
+        // if (Input.GetKeyDown ("space")){
+        //     transform.Translate(Vector3.up * 260 * Time.deltaTime, Space.World);
+        //} 
     }
 
     protected virtual void ComputeVelocity()
@@ -50,12 +64,15 @@ public class PhysicsObject : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // RBody.velocity = movement;
+        // RBody.AddForce(movement, ForceMode2D.Impulse);
         Velocity += Physics2D.gravity * (gravityModifier * Time.deltaTime);
         Velocity.x = TargetVelocity.x;
         Grounded = false;
         Vector2 moveOnGroud = new Vector2(GroundNorm.y, -GroundNorm.x);
+        Debug.Log(moveOnGroud);
         Vector2 deltaPos = Velocity * Time.deltaTime;
-        Vector2 move = moveOnGroud * deltaPos.x;
+        Vector2 move = new Vector2(1,0) * deltaPos.x;
         Movement(move, false);
         move = Vector2.up*deltaPos.y;
         Movement(move, true);
@@ -79,10 +96,10 @@ public class PhysicsObject : MonoBehaviour
                 if (currNorm.y > minGroundNormY)
                 {
                     Grounded = true;
-                    if (yMove)
+                    if (!yMove)
                     {
                         GroundNorm = currNorm;
-                        currNorm.x = 0; 
+                        currNorm.y = 0; 
                     }
                 }
 

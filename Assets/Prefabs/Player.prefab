@@ -47,8 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f2ec8d9920227f49b0b22f9b9460105, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 8487342012688875612}
+  self: {fileID: 8487342012688875612}
   possessionManager: {fileID: 8487342013397589007}
+  isPlayer: 1
 --- !u!50 &345838600
 Rigidbody2D:
   serializedVersion: 4
@@ -323,9 +324,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  jumpSpeed: 5
-  gravityModifier: 0.5
-  minGroundNormY: 0.65
+  jumpSpeed: 7
+  gravityModifier: 2
+  minGroundNormY: 0
 --- !u!114 &2111801839
 MonoBehaviour:
   m_ObjectHideFlags: 0
