@@ -29,40 +29,42 @@ public class ActivityManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_controller._active || isPlayer)
+        
+        if ( isPlayer || _controller._active)
         {
             
             if (Input.GetKey(KeyCode.E) && Time.time > _nextActivity)
             {
-                
                 _nextActivity = Time.time + activityDelay;
-                if(!isPlayer)
+                Debug.Log(_candidate);
+                if(_candidate != null)
                 {
-                    if (_candidate.CompareTag("Takable"))
+                    if (!isPlayer)
                     {
-                        Debug.Log("takeing");
-                        _stats.Inventory.Add(_candidate);
-                        _candidate.GetComponent<ItemManager>().Activate();
-                    }
-                }
-
-                if (_candidate.CompareTag("Door"))
-                {
-                    Debug.Log("in");
-                    if (_candidate.GetComponent<DoorController>().Open)
-                    {
-                        Debug.Log("You finished the level");
-                        SceneManager.LoadScene("New Scene");
-                    }
-                    else
-                    {
-                        if(!isPlayer)
+                        if (_candidate.CompareTag("Takable"))
                         {
-                            Debug.Log("opening");
-                            Debug.Log(_candidate.GetComponent<ActivateByItem>().Activate(_stats.Inventory));
+                            Debug.Log("takeing");
+                            _stats.Inventory.Add(_candidate);
+                            _candidate.GetComponent<ItemManager>().Activate();
                         }
                     }
-                    
+                    Debug.Log(_candidate.gameObject.name);
+                    if (_candidate.CompareTag("Door"))
+                    {
+                        if (_candidate.GetComponent<DoorController>().Open)
+                        {
+                            Debug.Log("You finished the level");
+                            SceneManager.LoadScene("New Scene");
+                        }
+                        else
+                        {
+                            if (!isPlayer)
+                            {
+                                Debug.Log("opening");
+                                Debug.Log(_candidate.GetComponent<ActivateByItem>().Activate(_stats.Inventory));
+                            }
+                        }
+                    }
                 }
             }
 
@@ -83,6 +85,7 @@ public class ActivityManager : MonoBehaviour
             if(!other.gameObject.CompareTag("World"))
             {
                 _candidate = other.gameObject;
+                Debug.Log(_candidate);
             }
         }
     }
