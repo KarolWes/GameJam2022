@@ -5,10 +5,12 @@ public class PhysicsObject : MonoBehaviour
 {
     [SerializeField] protected int speed = 5;
     [SerializeField] protected int jumpSpeed = 7;
+    [SerializeField] protected float jumpDelay = 0.5f;
     
     
     protected const float MinMoveDist = 0.001f;
     protected const float ShellRad = 0.01f;
+    protected float _nextjump= 0.15f;
     
     protected Vector2 Velocity;
     protected Vector2 TargetVelocity;
@@ -70,7 +72,6 @@ public class PhysicsObject : MonoBehaviour
         Velocity.x = TargetVelocity.x;
         Grounded = false;
         Vector2 moveOnGroud = new Vector2(GroundNorm.y, -GroundNorm.x);
-        Debug.Log(moveOnGroud);
         Vector2 deltaPos = Velocity * Time.deltaTime;
         Vector2 move = new Vector2(1,0) * deltaPos.x;
         Movement(move, false);

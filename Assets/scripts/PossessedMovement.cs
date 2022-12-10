@@ -37,9 +37,10 @@ public class PossessedMovement : PhysicsObject
         {
             Vector2 move = Vector2.zero;
             move.x = Input.GetAxis("Horizontal"); // arrows or a-d
-            if (Input.GetButtonDown("Jump") && Grounded) // space or w
+            if (Input.GetButtonDown("Jump") && Grounded && Time.time > _nextjump) // space or w
             {
                 Velocity.y = jumpSpeed;
+                _nextjump = Time.time + jumpDelay;
             }
             else if (Input.GetButtonUp("Jump"))
             {
