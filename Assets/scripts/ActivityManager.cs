@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ActivityManager : MonoBehaviour
 {
@@ -42,8 +43,17 @@ public class ActivityManager : MonoBehaviour
 
                 if (_candidate.CompareTag("Door"))
                 {
-                    Debug.Log("opening");
-                    Debug.Log(_candidate.GetComponent<ActivateByItem>().Activate(_inventory));
+                    if (_candidate.GetComponent<DoorController>().Open)
+                    {
+                        Debug.Log("You finished the level");
+                        SceneManager.LoadScene("New Scene");
+                    }
+                    else
+                    {
+                        Debug.Log("opening"); 
+                        Debug.Log(_candidate.GetComponent<ActivateByItem>().Activate(_inventory));
+                    }
+                    
                 }
             }
 
