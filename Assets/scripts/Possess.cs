@@ -15,6 +15,7 @@ public class Possess : MonoBehaviour
 
     private GameObject _candidate;
     private GameObject _npcPossessed = null;
+    private PossessedMovement _npcController;
 
     private SpriteRenderer _rend;
     private Rigidbody2D _rb;
@@ -44,6 +45,11 @@ public class Possess : MonoBehaviour
             PossessFunc();
             _nextPossession = Time.time + possessionDelay;
         }
+
+        if (_possessing)
+        {
+            player.transform.position = _npcPossessed.transform.position;
+        }
     }
 
     private void PossessFunc()
@@ -55,6 +61,8 @@ public class Possess : MonoBehaviour
                 _stats.PossessionCount += 1;
                 Debug.Log("Possessed " + _candidate.name);
                 _npcPossessed = _candidate;
+                _npcController = _npcPossessed.GetComponent<PossessedMovement>();
+                _npcController.Activate();
                 player.transform.position = _npcPossessed.transform.position;
                 _rend.enabled = false;
                 _inRange = false;
@@ -67,7 +75,8 @@ public class Possess : MonoBehaviour
         else
         {
             Debug.Log("Released");
-            
+            _npcController.Activate();
+            _npcController = null;
             _possessing = false;
             _npcPossessed = null;
             _rb.bodyType = RigidbodyType2D.Kinematic;

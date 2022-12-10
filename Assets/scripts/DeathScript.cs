@@ -7,6 +7,8 @@ public class DeathScript : MonoBehaviour
 {
     private bool _isTouching;
     private Stats _stats;
+    private float _nextHit = 0.15f;
+    private float _hitDelay = 1.0f;
 
     [SerializeField] private GameObject player;
     
@@ -33,10 +35,11 @@ public class DeathScript : MonoBehaviour
     {
         if(transform.parent && transform.parent.gameObject != other.gameObject)
         {
-            if (other.CompareTag("Fire"))
+            if (other.CompareTag("Fire") && Time.time > _nextHit)
             {
                 _isTouching = true;
                 _stats.Hp -= 1;
+                _nextHit = Time.time + _hitDelay;
                 if (_stats.Hp <= 0)
                 {
                     //death animation?

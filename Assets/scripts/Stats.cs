@@ -6,8 +6,8 @@ using UnityEngine;
 public class Stats : MonoBehaviour
 {
     // Start is called before the first frame update
-    private String _type = "ghost";
-    private int _hp = 1;
+    [SerializeField] private String _type = "ghost";
+    [SerializeField] private int _hp = 1;
     private int _possessionCount = 0;
     private Vector2 _startPos;
     private int _killCount = 0;
