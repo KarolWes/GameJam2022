@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class PlayerMovement : PhysicsObject
 {
-    protected Vector2 Pos;
     private Stats _stats;
     
     // Start is called before the first frame update
     void Start()
     {
-        Pos = transform.position;
+        ContactFilter.useTriggers = false;
+        ContactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(LayerMask.GetMask("Default")));
+        ContactFilter.useLayerMask = true;
     }
 
     // Update is called once per frame

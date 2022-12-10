@@ -34,8 +34,9 @@ public class PhysicsObject : MonoBehaviour
     void Start()
     {
         ContactFilter.useTriggers = false;
-        ContactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(LayerMask.GetMask("Water")));
+        ContactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(LayerMask.GetMask("Default")));
         ContactFilter.useLayerMask = true;
+        Debug.Log(gameObject.name + ContactFilter.layerMask);
     }
 
     // Update is called once per frame

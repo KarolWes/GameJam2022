@@ -46,9 +46,7 @@ public class ActivityManager : MonoBehaviour
                 {
                     Debug.Log(entry);
                 }
-                {
-                    
-                }
+                Debug.Log("___");
             }
         }
     }
@@ -56,7 +54,6 @@ public class ActivityManager : MonoBehaviour
     {
         if(transform.parent && transform.parent.gameObject != other.gameObject)
         {
-            Debug.Log("See" + other.gameObject.name);
             _candidate = other.gameObject;
         }
     }
