@@ -50,11 +50,13 @@
      <Compile Include="Assets\scripts\Possess.cs" />
      <Compile Include="Assets\scripts\ItemManager.cs" />
      <Compile Include="Assets\scripts\PossessedMovement.cs" />
+     <Compile Include="Assets\scripts\CameraManager.cs" />
      <Compile Include="Assets\scripts\PhysicsObject.cs" />
      <Compile Include="Assets\scripts\DoorController.cs" />
      <Compile Include="Assets\scripts\PlayerMovement.cs" />
      <Compile Include="Assets\scripts\Stats.cs" />
      <Compile Include="Assets\scripts\ActivityManager.cs" />
+     <Compile Include="Assets\scripts\SacrificeMechanics.cs" />
      <Compile Include="Assets\scripts\DeathScript.cs" />
      <Compile Include="Assets\scripts\hello.cs" />
      <Compile Include="Assets\scripts\ActivateByItem.cs" />
@@ -651,7 +653,7 @@
  </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/gamej22/project/GameJam2022/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
- </Reference> 
+ </Reference>
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
