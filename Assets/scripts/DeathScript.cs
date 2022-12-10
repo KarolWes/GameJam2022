@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DeathScript : MonoBehaviour
 {
@@ -9,8 +10,10 @@ public class DeathScript : MonoBehaviour
     private Stats _stats;
     private float _nextHit = 0.15f;
     private float _hitDelay = 1.0f;
+    private Possess _possess;
 
     [SerializeField] private GameObject player;
+    [SerializeField] private GameObject possessionManager;
     
     // Start is called before the first frame update
     void Start()
@@ -23,6 +26,7 @@ public class DeathScript : MonoBehaviour
         player.GetComponent<PlayerMovement>();
         _stats = player.GetComponent<Stats>();
         _stats.StartPos = player.transform.position;
+        _possess = possessionManager.GetComponent<Possess>();
     }
 
     // Update is called once per frame
@@ -52,13 +56,26 @@ public class DeathScript : MonoBehaviour
             _nextHit = Time.time + _hitDelay;
             if (_stats.Hp <= 0)
             {
+                
+                Debug.Log(GetComponent<AudioSource>());
+                GetComponent<AudioSource>().Play();
+                Debug.Log(_stats.StartPos);
+                _possess.Release();
                 //death animation?
-                player.transform.position = _stats.StartPos;
-                _stats.KillCount += 1;
+                StartCoroutine(UntilPlays());
+                
             }
         }
     }
 
+    IEnumerator UntilPlays(){
+        var audio = gameObject.GetComponent<AudioSource>();
+        audio.Play ();
+        yield return new WaitWhile (()=> audio.isPlaying);
+        //player.transform.position = _stats.StartPos;
+        _stats.KillCount += 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
     private void OnTriggerExit2D(Collider2D other)
     {
         _isTouching = false;

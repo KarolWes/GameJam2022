@@ -78,21 +78,29 @@ public class Possess : MonoBehaviour
         }
         else
         {
-            Debug.Log("Released");
+            Release();
+            player.transform.position += new Vector3(2 * size, 0);
+        }
+    }
+
+    public void Release()
+    {
+        Debug.Log("Released");
+        if (_npcController != null)
+        {
             _npcController.Activate();
             _npcController = null;
             _possessing = false;
             _npcPossessed = null;
-            _rb.bodyType = RigidbodyType2D.Kinematic;
-            _col .enabled= true;
-            player.transform.position += new Vector3(2 * size, 0);
-            _rend.enabled = true;
-            _stats.Hp = 1;
-            _stats.Type = "ghost";
         }
+        _rb.bodyType = RigidbodyType2D.Kinematic;
+        _col.enabled = true;
+        _rend.enabled = true;
+        _stats.Hp = 1;
+        _stats.Type = "ghost";
     }
 
-    
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(transform.parent && transform.parent.gameObject != other.gameObject)

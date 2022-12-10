@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 345838597}
   - component: {fileID: 345838599}
-  - component: {fileID: 345838598}
   - component: {fileID: 345838600}
+  - component: {fileID: 3065488480177156396}
   m_Layer: 0
   m_Name: TouchRadius
   m_TagString: Untagged
@@ -47,22 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 8487342012688875612}
---- !u!58 &345838598
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 345838596}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.6
+  possessionManager: {fileID: 8487342013397589007}
 --- !u!50 &345838600
 Rigidbody2D:
   serializedVersion: 4
@@ -84,6 +69,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!70 &3065488480177156396
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 345838596}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 4.29, y: 8.76}
+  m_Direction: 0
 --- !u!1 &8487342012688875612
 GameObject:
   m_ObjectHideFlags: 0
@@ -114,7 +115,7 @@ Transform:
   m_GameObject: {fileID: 8487342012688875612}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8487342013246457689}
@@ -164,7 +165,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: c3c6eb8bf43558a41ac8e8cdea6b234c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 98a38a6c7bdee9b48a0dc79761c6f067, type: 3}
   m_Color: {r: 0.026023442, g: 0.8113208, b: 0.744616, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -189,7 +190,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.48, y: 6.94}
   m_Direction: 0
 --- !u!50 &8487342012688875600
 Rigidbody2D:
@@ -375,7 +376,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 12.99
 --- !u!50 &8487342013397588992
 Rigidbody2D:
   serializedVersion: 4
