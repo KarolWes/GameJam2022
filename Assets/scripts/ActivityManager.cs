@@ -29,7 +29,7 @@ public class ActivityManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(_candidate);
+        //Debug.Log(_candidate);
         if (_controller._active)
         {
             if (Input.GetKey(KeyCode.E) && Time.time > _nextActivity)

@@ -124,6 +124,14 @@ public class Possess : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        _inRange = false;
+        if (other.CompareTag("NPC"))
+        {
+            _inRange = false;
+        }
+    }
+
+    public GameObject NpcPossessed
+    {
+        get => _npcPossessed;
     }
 }
