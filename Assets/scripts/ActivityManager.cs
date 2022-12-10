@@ -11,8 +11,9 @@ public class ActivityManager : MonoBehaviour
     private float _nextActivity= 0.15f;
     private PossessedMovement _controller;
     private GameObject _candidate;
+    private Stats _stats;
 
-    private List<GameObject> _inventory;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -22,12 +23,13 @@ public class ActivityManager : MonoBehaviour
     private void OnEnable()
     {
         _controller = self.GetComponent<PossessedMovement>();
-        _inventory = new List<GameObject>();
+        _stats = self.GetComponent<Stats>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(_candidate);
         if (_controller._active)
         {
             if (Input.GetKey(KeyCode.E) && Time.time > _nextActivity)
@@ -37,7 +39,7 @@ public class ActivityManager : MonoBehaviour
                 if (_candidate.CompareTag("Takable"))
                 {
                     Debug.Log("takeing");
-                    _inventory.Add(_candidate);
+                    _stats.Inventory.Add(_candidate);
                     _candidate.GetComponent<ItemManager>().Activate();
                 }
 
@@ -51,7 +53,7 @@ public class ActivityManager : MonoBehaviour
                     else
                     {
                         Debug.Log("opening"); 
-                        Debug.Log(_candidate.GetComponent<ActivateByItem>().Activate(_inventory));
+                        Debug.Log(_candidate.GetComponent<ActivateByItem>().Activate(_stats.Inventory));
                     }
                     
                 }
@@ -59,7 +61,7 @@ public class ActivityManager : MonoBehaviour
 
             if (Input.GetKey(KeyCode.I))
             {
-                foreach (var entry in _inventory)
+                foreach (var entry in _stats.Inventory)
                 {
                     Debug.Log(entry);
                 }
@@ -79,6 +81,9 @@ public class ActivityManager : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D other)
     {
-        _candidate = null;
+        if(!other.gameObject.CompareTag("World"))
+        {
+            _candidate = null;
+        }
     }
 }

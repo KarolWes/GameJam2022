@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 7261738423722750554}
   - component: {fileID: 7852918710998184478}
   - component: {fileID: 7092082783075759540}
-  m_Layer: 0
+  - component: {fileID: 1173691949}
+  m_Layer: 6
   m_Name: Gem
   m_TagString: Takable
   m_Icon: {fileID: 0}
@@ -31,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7852918710998184478
 SpriteRenderer:
@@ -97,4 +98,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d013130775159a40a712e3ff7c1ee22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  self: {fileID: 0}
+--- !u!70 &1173691949
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6764847463348002927}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.8828125, y: 1}
+  m_Direction: 0

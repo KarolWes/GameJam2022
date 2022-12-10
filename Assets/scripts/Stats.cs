@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Stats : MonoBehaviour
@@ -11,6 +12,17 @@ public class Stats : MonoBehaviour
     private int _possessionCount = 0;
     private Vector2 _startPos;
     private int _killCount = 0;
+    private List<GameObject> _inventory;
+
+    private void Start()
+    {
+        _inventory = new List<GameObject>();
+    }
+
+    public List<GameObject> Inventory
+    {
+        get => _inventory;
+    }
 
     public string Type
     {

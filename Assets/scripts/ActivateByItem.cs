@@ -27,6 +27,7 @@ public class ActivateByItem : MonoBehaviour
             if (el == item)
             {
                 _active = true;
+                inventory.Remove(el);
                 if (gameObject.CompareTag("Door"))
                 {
                     gameObject.GetComponent<DoorController>().Open = true;

@@ -101,6 +101,10 @@ public class Possess : MonoBehaviour
         _stats.Type = "ghost";
     }
 
+    public bool IsPossessing()
+    {
+        return _npcPossessed != null;
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
