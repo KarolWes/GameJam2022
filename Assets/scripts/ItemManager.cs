@@ -24,25 +24,23 @@ public class ItemManager : MonoBehaviour
 
     public void Activate()
     {
-        _active ^= true;
+        switch (tag)
+        {
+            case "Takable":
+                _rend.enabled = false;
+                _col.enabled = false;
+                break;
+            case "Door":
+                    
+                break;
+            default:
+                Debug.Log("unrecognized type");
+                break;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_active)
-        {
-            _active = false;
-            switch (tag)
-            {
-                case "Takable":
-                    _rend.enabled = false;
-                    _col.enabled = false;
-                    break;
-                default:
-                    Debug.Log("unrecognized type");
-                    break;
-            }
-        }
     }
 }

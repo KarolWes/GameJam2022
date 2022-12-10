@@ -14,6 +14,9 @@ public class PossessedMovement : PhysicsObject
     // Start is called before the first frame update
     void Start()
     {
+        ContactFilter.useTriggers = false;
+        ContactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(LayerMask.GetMask("Default")));
+        ContactFilter.useLayerMask = true;
     }
     
     

@@ -31,12 +31,19 @@ public class ActivityManager : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.E) && Time.time > _nextActivity)
             {
-                Debug.Log("doing something");
+                
                 _nextActivity = Time.time + activityDelay;
                 if (_candidate.CompareTag("Takable"))
                 {
+                    Debug.Log("takeing");
                     _inventory.Add(_candidate);
                     _candidate.GetComponent<ItemManager>().Activate();
+                }
+
+                if (_candidate.CompareTag("Door"))
+                {
+                    Debug.Log("opening");
+                    Debug.Log(_candidate.GetComponent<ActivateByItem>().Activate(_inventory));
                 }
             }
 
@@ -54,11 +61,14 @@ public class ActivityManager : MonoBehaviour
     {
         if(transform.parent && transform.parent.gameObject != other.gameObject)
         {
-            _candidate = other.gameObject;
+            if(!other.gameObject.CompareTag("World"))
+            {
+                _candidate = other.gameObject;
+            }
         }
     }
     private void OnTriggerExit2D(Collider2D other)
     {
-        
+        _candidate = null;
     }
 }
