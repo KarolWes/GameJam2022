@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,8 @@ public class PossessedMovement : PhysicsObject
     public bool _active = false;
     private Rigidbody2D _rb;
     private CapsuleCollider2D _col;
+    [SerializeField] private Dictionary<string, bool> abilities = new Dictionary<String,Boolean>();
+    
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +20,7 @@ public class PossessedMovement : PhysicsObject
         ContactFilter.useTriggers = false;
         ContactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(LayerMask.GetMask("Default")));
         ContactFilter.useLayerMask = true;
+        
     }
     
     

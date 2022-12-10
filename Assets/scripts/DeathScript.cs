@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class DeathScript : MonoBehaviour
 {
@@ -12,8 +13,9 @@ public class DeathScript : MonoBehaviour
     private float _hitDelay = 1.0f;
     private Possess _possess;
 
-    [SerializeField] private GameObject player;
+    [FormerlySerializedAs("player")] [SerializeField] private GameObject self;
     [SerializeField] private GameObject possessionManager;
+    [SerializeField] private bool isPlayer = true;
     
     // Start is called before the first frame update
     void Start()
@@ -23,10 +25,13 @@ public class DeathScript : MonoBehaviour
 
     private void OnEnable()
     {
-        player.GetComponent<PlayerMovement>();
-        _stats = player.GetComponent<Stats>();
-        _stats.StartPos = player.transform.position;
-        _possess = possessionManager.GetComponent<Possess>();
+        if (isPlayer)
+        {
+            _possess = possessionManager.GetComponent<Possess>();
+        }
+        _stats = self.GetComponent<Stats>();
+        _stats.StartPos = self.transform.position;
+        
     }
 
     // Update is called once per frame
@@ -52,7 +57,7 @@ public class DeathScript : MonoBehaviour
         {
             
             _stats.Hp -= 1;
-            Debug.Log("hit" + _stats.Hp);
+            Debug.Log(transform.parent.gameObject + " hit " + _stats.Hp);
             _nextHit = Time.time + _hitDelay;
             if (_stats.Hp <= 0)
             {
@@ -72,10 +77,18 @@ public class DeathScript : MonoBehaviour
         var audio = gameObject.GetComponent<AudioSource>();
         audio.Play ();
         yield return new WaitWhile (()=> audio.isPlaying);
-        _stats.KillCount += 1;
-        Debug.Log("Finished");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        gameObject.GetComponent<Collider2D>().enabled = true;
+        Debug.Log(gameObject.name + " Finished");
+        if (transform.parent.gameObject.name == "Player")
+        {
+            _stats.KillCount += 1;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            gameObject.GetComponent<Collider2D>().enabled = true;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        
     }
     private void OnTriggerExit2D(Collider2D other)
     {
