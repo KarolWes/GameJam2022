@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Possess : MonoBehaviour
 {
@@ -43,6 +44,11 @@ public class Possess : MonoBehaviour
             _nextPossession = Time.time + possessionDelay;
         }
 
+        if (Input.GetKey(KeyCode.T))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
         if (_possessing)
         {
             player.transform.position = _npcPossessed.transform.position;
@@ -84,9 +90,9 @@ public class Possess : MonoBehaviour
         Debug.Log("Released");
         if (_npcController != null)
         {
+            _possessing = false;
             _npcController.Activate();
             _npcController = null;
-            _possessing = false;
             _npcPossessed = null;
             _rb.bodyType = RigidbodyType2D.Kinematic;
             _col.enabled = true;

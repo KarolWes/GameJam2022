@@ -36,19 +36,18 @@ public class ActivityManager : MonoBehaviour
             if (Input.GetKey(KeyCode.E) && Time.time > _nextActivity)
             {
                 
-                Debug.Log(_candidate);
+                
                 if(_candidate != null)
                 {
                     if (!isPlayer)
                     {
                         if (_candidate.CompareTag("Takable"))
                         {
-                            Debug.Log("takeing");
+                            
                             _stats.Inventory.Add(_candidate);
                             _candidate.GetComponent<ItemManager>().Activate();
                         }
                     }
-                    Debug.Log(_candidate.gameObject.name);
                     if (_candidate.CompareTag("Door"))
                     {
                         if (_candidate.GetComponent<DoorController>().Open)
@@ -86,7 +85,6 @@ public class ActivityManager : MonoBehaviour
             if(!other.gameObject.CompareTag("World"))
             {
                 _candidate = other.gameObject;
-                Debug.Log(_candidate);
             }
         }
     }
