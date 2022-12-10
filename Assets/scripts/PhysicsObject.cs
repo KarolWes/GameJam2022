@@ -25,7 +25,7 @@ public class PhysicsObject : MonoBehaviour
     public float minGroundNormY = 0.65f;
 
 
-    private void OnEnable()
+    protected void OnEnable()
     {
         RBody = GetComponent<Rigidbody2D>();
     }

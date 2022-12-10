@@ -19,6 +19,7 @@ public class Possess : MonoBehaviour
     private SpriteRenderer _rend;
     private Rigidbody2D _rb;
     private CapsuleCollider2D _col;
+    private Stats _stats;
 
     [SerializeField] private GameObject player;
     // Start is called before the first frame update
@@ -32,6 +33,7 @@ public class Possess : MonoBehaviour
         _rend = player.GetComponent<SpriteRenderer>();
         _rb = player.GetComponent<Rigidbody2D>();
         _col = player.GetComponent<CapsuleCollider2D>();
+        _stats = player.GetComponent<Stats>();
     }
 
     // Update is called once per frame
@@ -50,6 +52,7 @@ public class Possess : MonoBehaviour
         {
             if (_inRange)
             {
+                _stats.PossessionCount += 1;
                 Debug.Log("Possessed " + _candidate.name);
                 _npcPossessed = _candidate;
                 player.transform.position = _npcPossessed.transform.position;

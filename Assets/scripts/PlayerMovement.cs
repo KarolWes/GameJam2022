@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : PhysicsObject
 {
     protected Vector2 Pos;
+    private Stats _stats;
     
     // Start is called before the first frame update
     void Start()
