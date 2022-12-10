@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 246618306896462683}
   - component: {fileID: -4010101520364703916}
   - component: {fileID: 3736092898292582818}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Block
   m_TagString: World
   m_Icon: {fileID: 0}
@@ -33,7 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1629259156998164205
 SpriteRenderer:

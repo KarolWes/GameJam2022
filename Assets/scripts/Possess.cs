@@ -21,6 +21,7 @@ public class Possess : MonoBehaviour
     private Rigidbody2D _rb;
     private CapsuleCollider2D _col;
     private Stats _stats;
+    private Stats _npcStats;
 
     [SerializeField] private GameObject player;
     // Start is called before the first frame update
@@ -62,6 +63,7 @@ public class Possess : MonoBehaviour
                 Debug.Log("Possessed " + _candidate.name);
                 _npcPossessed = _candidate;
                 _npcController = _npcPossessed.GetComponent<PossessedMovement>();
+                _npcStats = _npcPossessed.GetComponent<Stats>();
                 _npcController.Activate();
                 player.transform.position = _npcPossessed.transform.position;
                 _rend.enabled = false;
@@ -70,6 +72,8 @@ public class Possess : MonoBehaviour
                 _candidate = null;
                 _rb.bodyType = RigidbodyType2D.Static;
                 _col.enabled = false;
+                _stats.Hp = _npcStats.Hp;
+                _stats.Type = _npcStats.Type;
             }
         }
         else
@@ -83,6 +87,8 @@ public class Possess : MonoBehaviour
             _col .enabled= true;
             player.transform.position += new Vector3(2 * size, 0);
             _rend.enabled = true;
+            _stats.Hp = 1;
+            _stats.Type = "ghost";
         }
     }
 

@@ -7,13 +7,16 @@ public class PossessedMovement : PhysicsObject
     // Start is called before the first frame update
     protected Vector2 Pos;
     private Stats _stats;
-    private bool _active = false;
-    
+    public bool _active = false;
+    private Rigidbody2D _rb;
+    private CapsuleCollider2D _col;
+
     // Start is called before the first frame update
     void Start()
     {
-        Pos = transform.position;
     }
+    
+    
 
     // Update is called once per frame
 
