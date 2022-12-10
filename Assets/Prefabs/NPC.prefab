@@ -37,7 +37,7 @@ Transform:
   - {fileID: 5175704335567882574}
   - {fileID: 5175704334464957340}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4179217035528865026
 SpriteRenderer:
@@ -222,8 +222,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f2ec8d9920227f49b0b22f9b9460105, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  self: {fileID: 4179217035528865024}
   possessionManager: {fileID: 0}
+  isPlayer: 0
 --- !u!50 &5175704334464957337
 Rigidbody2D:
   serializedVersion: 4

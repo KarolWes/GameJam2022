@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
@@ -55,26 +53,36 @@ public class DeathScript : MonoBehaviour
     {
         if (_isTouching && Time.time > _nextHit)
         {
-            
             _stats.Hp -= 1;
-            Debug.Log(transform.parent.gameObject + " hit " + _stats.Hp);
             _nextHit = Time.time + _hitDelay;
             if (_stats.Hp <= 0)
             {
-                gameObject.GetComponent<Collider2D>().enabled = false;
-                Debug.Log(GetComponent<AudioSource>());
-                GetComponent<AudioSource>().Play();
-                Debug.Log(_stats.StartPos);
-                _possess.Release();
-                //death animation?
-                StartCoroutine(UntilPlays());
-                
+                Kill(gameObject.GetComponent<AudioSource>());
             }
         }
     }
 
-    IEnumerator UntilPlays(){
-        var audio = gameObject.GetComponent<AudioSource>();
+    public void Kill(AudioSource audio)
+    {
+        if (isPlayer)
+        {
+            self.GetComponent<PlayerMovement>().enabled = false;
+        }
+        else
+        {
+            self.GetComponent<PossessedMovement>().enabled = false;
+        }
+        gameObject.GetComponent<Collider2D>().enabled = false;
+        if (self.name == "Player")
+        {
+            _possess.Release();
+        }
+
+        //death animation?
+        StartCoroutine(UntilPlays(audio));
+    }
+
+    IEnumerator UntilPlays(AudioSource audio){
         audio.Play ();
         yield return new WaitWhile (()=> audio.isPlaying);
         Debug.Log(gameObject.name + " Finished");
@@ -83,10 +91,11 @@ public class DeathScript : MonoBehaviour
             _stats.KillCount += 1;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             gameObject.GetComponent<Collider2D>().enabled = true;
+            self.GetComponent<PlayerMovement>().enabled = true;
         }
         else
         {
-            Destroy(gameObject);
+            Destroy(self);
         }
         
     }

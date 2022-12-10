@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SacrificeMechanics : MonoBehaviour
@@ -8,6 +5,8 @@ public class SacrificeMechanics : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject possessionManager;
     private Possess _possess;
+    private bool _ready = false;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -21,8 +20,23 @@ public class SacrificeMechanics : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKey(KeyCode.K))
+        {
+            if (_ready)
+            {
+                _ready = false;
+                Sacrifice();
+            }
+        }
     }
+
+    private void Sacrifice()
+    {
+        var npc = _possess.NpcPossessed;
+        _possess.Release();
+        npc.GetComponentInChildren<DeathScript>().Kill(gameObject.GetComponent<AudioSource>());
+    }
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(transform.parent && transform.parent.gameObject != other.gameObject)
@@ -31,6 +45,7 @@ public class SacrificeMechanics : MonoBehaviour
             {
                 if (_possess.IsPossessing() && _possess.NpcPossessed.GetComponent<Stats>().Inventory.Count == 0)
                 {
+                    _ready = true;
                     Debug.Log("Sacrifice point available");
                 }
             }
@@ -39,6 +54,12 @@ public class SacrificeMechanics : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        
+        if(transform.parent && transform.parent.gameObject != other.gameObject)
+        {
+            if (other.CompareTag("NPC"))
+            {
+                _ready = false;
+            }
+        }
     }
 }
