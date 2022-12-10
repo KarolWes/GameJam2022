@@ -651,7 +651,7 @@
  </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/gamej22/project/GameJam2022/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
- </Reference>
+ </Reference> 
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>

@@ -79,7 +79,6 @@ public class Possess : MonoBehaviour
         else
         {
             Release();
-            player.transform.position += new Vector3(2 * size, 0);
         }
     }
 
@@ -92,14 +91,20 @@ public class Possess : MonoBehaviour
             _npcController = null;
             _possessing = false;
             _npcPossessed = null;
+            _rb.bodyType = RigidbodyType2D.Kinematic;
+            _col.enabled = true;
+            player.transform.position += new Vector3(0, .1f);
+            _rend.enabled = true;
         }
-        _rb.bodyType = RigidbodyType2D.Kinematic;
-        _col.enabled = true;
-        _rend.enabled = true;
+        
         _stats.Hp = 1;
         _stats.Type = "ghost";
     }
 
+    public bool IsPossessing()
+    {
+        return _npcPossessed != null;
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -119,6 +124,14 @@ public class Possess : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        _inRange = false;
+        if (other.CompareTag("NPC"))
+        {
+            _inRange = false;
+        }
+    }
+
+    public GameObject NpcPossessed
+    {
+        get => _npcPossessed;
     }
 }

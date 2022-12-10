@@ -3,7 +3,7 @@
 /Library/
 /Packages/
 /Temp/
-/UserSettings/Layouts/
+/UserSettings/Layouts/default-2022.dwlt
 /obj/
 /Assets/scripts/.idea
-*.dwlt
+Assembly-CSharp.csproj

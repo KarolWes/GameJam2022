@@ -56,7 +56,7 @@ public class DeathScript : MonoBehaviour
             _nextHit = Time.time + _hitDelay;
             if (_stats.Hp <= 0)
             {
-                
+                gameObject.GetComponent<Collider2D>().enabled = false;
                 Debug.Log(GetComponent<AudioSource>());
                 GetComponent<AudioSource>().Play();
                 Debug.Log(_stats.StartPos);
@@ -72,9 +72,10 @@ public class DeathScript : MonoBehaviour
         var audio = gameObject.GetComponent<AudioSource>();
         audio.Play ();
         yield return new WaitWhile (()=> audio.isPlaying);
-        //player.transform.position = _stats.StartPos;
         _stats.KillCount += 1;
+        Debug.Log("Finished");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        gameObject.GetComponent<Collider2D>().enabled = true;
     }
     private void OnTriggerExit2D(Collider2D other)
     {
