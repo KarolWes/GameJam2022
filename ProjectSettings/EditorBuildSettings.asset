@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TestScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/level1withcolliders.unity
+    guid: 588da7b92346f30439f1cf4f2b9d96e2
   m_configObjects: {}

@@ -53,7 +53,7 @@ public class ActivityManager : MonoBehaviour
                         if (_candidate.GetComponent<DoorController>().Open)
                         {
                             Debug.Log("You finished the level");
-                            SceneManager.LoadScene("New Scene");
+                            SceneManager.LoadScene("level1withcolliders");
                         }
                         else
                         {

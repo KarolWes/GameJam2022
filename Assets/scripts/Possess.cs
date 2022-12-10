@@ -48,6 +48,10 @@ public class Possess : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+        if (Input.GetKey(KeyCode.V))
+        {
+            SceneManager.LoadScene("level1withcolliders");
+        }
 
         if (_possessing)
         {
