@@ -35,7 +35,7 @@ public class ActivityManager : MonoBehaviour
             
             if (Input.GetKey(KeyCode.E) && Time.time > _nextActivity)
             {
-                _nextActivity = Time.time + activityDelay;
+                
                 Debug.Log(_candidate);
                 if(_candidate != null)
                 {
@@ -66,6 +66,7 @@ public class ActivityManager : MonoBehaviour
                         }
                     }
                 }
+                _nextActivity = Time.time + activityDelay;
             }
 
             if (Input.GetKey(KeyCode.I))

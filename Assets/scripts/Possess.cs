@@ -70,6 +70,7 @@ public class Possess : MonoBehaviour
                 _col.enabled = false;
                 _stats.Hp = _npcStats.Hp;
                 _stats.Type = _npcStats.Type;
+                player.GetComponentInChildren<ActivityManager>().enabled = false;
             }
         }
         else
@@ -91,6 +92,8 @@ public class Possess : MonoBehaviour
             _col.enabled = true;
             player.transform.position += new Vector3(0, .1f);
             _rend.enabled = true;
+            player.GetComponentInChildren<ActivityManager>().enabled = true;
+            
         }
         
         _stats.Hp = 1;
