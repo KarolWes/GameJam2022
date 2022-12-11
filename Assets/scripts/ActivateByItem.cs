@@ -5,6 +5,7 @@ public class ActivateByItem : MonoBehaviour
 {
 
     private bool _active = false;
+    [SerializeField] private AudioClip doorSound;
 
     [SerializeField] private GameObject item;
     // Start is called before the first frame update
@@ -31,6 +32,7 @@ public class ActivateByItem : MonoBehaviour
                 {
                     gameObject.GetComponent<DoorController>().Open = true;
                 }
+                
                 return true;
             }
         }

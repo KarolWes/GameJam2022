@@ -23,6 +23,8 @@ public class Possess : MonoBehaviour
     private Stats _npcStats;
 
     [SerializeField] private GameObject player;
+
+    [SerializeField] private AudioClip possSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,20 +48,20 @@ public class Possess : MonoBehaviour
             _nextPossession = Time.time + possessionDelay;
         }
 
-        if (Input.GetKey(KeyCode.T))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            _stats.LoadFile();
-        }
-        if (Input.GetKey(KeyCode.V))
-        {
-            SceneManager.LoadScene("level1withcolliders");
-        }
-
-        if (Input.GetKey(KeyCode.B))
-        {
-            Debug.Log(_stats.PossessionCount);
-        }
+        // if (Input.GetKey(KeyCode.T))
+        // {
+        //     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //     _stats.LoadFile();
+        // }
+        // if (Input.GetKey(KeyCode.V))
+        // {
+        //     SceneManager.LoadScene("level1withcolliders");
+        // }
+        //
+        // if (Input.GetKey(KeyCode.B))
+        // {
+        //     Debug.Log(_stats.PossessionCount);
+        // }
 
         if (_possessing)
         {
@@ -75,6 +77,8 @@ public class Possess : MonoBehaviour
             {
                 Release();
             }
+
+            
             _stats.PossessionCount += 1;
             Debug.Log("Possessed " + _candidate.name);
             _npcPossessed = _candidate;

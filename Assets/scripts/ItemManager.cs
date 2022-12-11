@@ -8,6 +8,8 @@ public class ItemManager : MonoBehaviour
     private bool _active = false;
     private SpriteRenderer _rend;
     private Collider2D _col;
+    
+    [SerializeField] private AudioClip keySound;
     void Start()
     {
         
@@ -29,7 +31,7 @@ public class ItemManager : MonoBehaviour
                 _col.enabled = false;
                 break;
             case "Door":
-                    
+                
                 break;
             default:
                 Debug.Log("unrecognized type");
