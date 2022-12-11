@@ -11,7 +11,7 @@ public class PossessedMovement : PhysicsObject
     private Rigidbody2D _rb;
     private CapsuleCollider2D _col;
 
-    private bool dir = false;
+    private bool dir = true;
     // [SerializeField] private Dictionary<string, bool> abilities = new Dictionary<String,Boolean>();
     
 
@@ -41,13 +41,13 @@ public class PossessedMovement : PhysicsObject
             move.x = Input.GetAxis("Horizontal"); // arrows or a-d
             if (move.x < 0 && dir)
             {
-                gameObject.GetComponent<SpriteRenderer>().flipX = true;
+                gameObject.GetComponent<SpriteRenderer>().flipX = false;
                 dir = false;
             }
 
             if (move.x > 0 && !dir)
             {
-                gameObject.GetComponent<SpriteRenderer>().flipX = false;
+                gameObject.GetComponent<SpriteRenderer>().flipX = true;
                 dir = true;
             }
             if (Input.GetButtonDown("Jump") && Grounded && Time.time > _nextjump) // space or w

@@ -48,11 +48,11 @@ public class Possess : MonoBehaviour
             _nextPossession = Time.time + possessionDelay;
         }
 
-        // if (Input.GetKey(KeyCode.T))
-        // {
-        //     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        //     _stats.LoadFile();
-        // }
+        if (Input.GetKey(KeyCode.T))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            _stats.LoadFile();
+        }
         // if (Input.GetKey(KeyCode.V))
         // {
         //     SceneManager.LoadScene("level1withcolliders");
