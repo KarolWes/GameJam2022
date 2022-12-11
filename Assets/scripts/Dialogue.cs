@@ -41,6 +41,8 @@ public class Dialogue : MonoBehaviour
     async Task ManageBubble(Vector3 pos, string t)
     {
         var b = Instantiate(bubble, new Vector3(pos.x + 1, pos.y + 1), Quaternion.identity);
+        b.GetComponent<SpriteRenderer>().sortingOrder = 100;
+        b.GetComponentInChildren<TextMeshPro>().GetComponent<SpriteRenderer>().sortingOrder = 100;
         b.GetComponentInChildren<TextMeshPro>().text = t;
         _tmpBubble.Add(b);
         await Task.Delay(timeSec*1000);

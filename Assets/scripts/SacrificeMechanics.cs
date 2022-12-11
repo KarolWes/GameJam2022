@@ -32,6 +32,7 @@ public class SacrificeMechanics : MonoBehaviour
 
     private void Sacrifice()
     {
+        DialogueManager.Instance.InvokeDialogue(player, 6);
         var npc = _possess.NpcPossessed;
         _possess.Release();
         npc.GetComponentInChildren<DeathScript>().Kill(gameObject.GetComponent<AudioSource>());
