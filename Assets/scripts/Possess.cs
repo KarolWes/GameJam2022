@@ -48,10 +48,16 @@ public class Possess : MonoBehaviour
         if (Input.GetKey(KeyCode.T))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            _stats.LoadFile();
         }
         if (Input.GetKey(KeyCode.V))
         {
             SceneManager.LoadScene("level1withcolliders");
+        }
+
+        if (Input.GetKey(KeyCode.B))
+        {
+            Debug.Log(_stats.PossessionCount);
         }
 
         if (_possessing)
@@ -74,6 +80,7 @@ public class Possess : MonoBehaviour
             _npcController = _npcPossessed.GetComponent<PossessedMovement>();
             _npcStats = _npcPossessed.GetComponent<Stats>();
             _npcController.Activate();
+            DialogueManager.Instance.InvokeDialogue(_npcPossessed, 2);
             _death = _npcPossessed.GetComponentInChildren<DeathScript>();
             player.transform.position = _npcPossessed.transform.position;
             _rend.enabled = false;
@@ -90,6 +97,7 @@ public class Possess : MonoBehaviour
         {
             Release();
         }
+        _stats.SaveFile();
     }
 
     public void Release()
@@ -131,7 +139,7 @@ public class Possess : MonoBehaviour
                 {
                     _inRange = true;
                     _candidate = other.gameObject;
-                    Debug.Log("see");
+                    DialogueManager.Instance.InvokeDialogue(_candidate, 1);
                 }
             }
         }

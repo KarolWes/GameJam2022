@@ -64,6 +64,7 @@ public class DeathScript : MonoBehaviour
 
     public void Kill(AudioSource audio)
     {
+        DialogueManager.Instance.InvokeDialogue(self, 0);
         if (isPlayer)
         {
             self.GetComponent<PlayerMovement>().enabled = false;
@@ -85,13 +86,13 @@ public class DeathScript : MonoBehaviour
     IEnumerator UntilPlays(AudioSource audio){
         audio.Play ();
         yield return new WaitWhile (()=> audio.isPlaying);
-        Debug.Log(gameObject.name + " Finished");
         if (transform.parent.gameObject.name == "Player")
         {
             _stats.KillCount += 1;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             gameObject.GetComponent<Collider2D>().enabled = true;
             self.GetComponent<PlayerMovement>().enabled = true;
+            _stats.SaveFile();
         }
         else
         {

@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7609504567088641422}
   - component: {fileID: 5175704335933321478}
   - component: {fileID: 1749825039}
+  - component: {fileID: 5545199983092298221}
   m_Layer: 3
   m_Name: NPC
   m_TagString: NPC
@@ -274,6 +275,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5545199983092298221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4179217035528865024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb321f0f71eec12489d1f0ec66382424, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texts:
+  - 
+  self: {fileID: 0}
+  bubble: {fileID: 310618974633564086, guid: ef6a6214ed62311418ae63dc45b5de94, type: 3}
 --- !u!1 &5175704334464957341
 GameObject:
   m_ObjectHideFlags: 0

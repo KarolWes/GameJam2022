@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 public class Stats : MonoBehaviour
@@ -15,6 +17,44 @@ public class Stats : MonoBehaviour
     private void Start()
     {
         _inventory = new List<GameObject>();
+    }
+
+    public void SaveFile()
+    {
+        string destination = Application.persistentDataPath + "/save.dat";
+        FileStream file;
+ 
+        if(File.Exists(destination)) file = File.OpenWrite(destination);
+        else file = File.Create(destination);
+        BinaryFormatter bf = new BinaryFormatter();
+        var l = new List<int>();
+        l.Add(_possessionCount);
+        l.Add(_killCount);
+        bf.Serialize(file, l);
+        file.Close();
+    }
+ 
+    public void LoadFile()
+    {
+        string destination = Application.persistentDataPath + "/save.dat";
+        FileStream file;
+ 
+        if(File.Exists(destination)) file = File.OpenRead(destination);
+        else
+        {
+            Debug.LogError("File not found");
+            return;
+        }
+ 
+        BinaryFormatter bf = new BinaryFormatter();
+        List<int> data = (List<int>) bf.Deserialize(file);
+        file.Close();
+
+        _possessionCount = data[0];
+        _killCount = data[1];
+ 
+        Debug.Log(_possessionCount);
+        Debug.Log(_killCount);
     }
 
     public List<GameObject> Inventory
