@@ -12,6 +12,7 @@ public class Possess : MonoBehaviour
 
     private GameObject _candidate;
     private GameObject _npcPossessed = null;
+    private DeathScript _death;
     private PossessedMovement _npcController;
 
     private SpriteRenderer _rend;
@@ -71,6 +72,7 @@ public class Possess : MonoBehaviour
                 _npcController = _npcPossessed.GetComponent<PossessedMovement>();
                 _npcStats = _npcPossessed.GetComponent<Stats>();
                 _npcController.Activate();
+                _death = _npcPossessed.GetComponentInChildren<DeathScript>();
                 player.transform.position = _npcPossessed.transform.position;
                 _rend.enabled = false;
                 _inRange = false;
@@ -96,6 +98,7 @@ public class Possess : MonoBehaviour
         {
             _possessing = false;
             _npcController.Activate();
+            var audio = _npcPossessed.GetComponent<AudioSource>();
             _npcController = null;
             _npcPossessed = null;
             _rb.bodyType = RigidbodyType2D.Kinematic;
@@ -103,7 +106,9 @@ public class Possess : MonoBehaviour
             player.transform.position += new Vector3(0, .1f);
             _rend.enabled = true;
             player.GetComponentInChildren<ActivityManager>().enabled = true;
-            
+            _death.Kill(audio);
+            _death = null;
+
         }
         
         _stats.Hp = 1;
