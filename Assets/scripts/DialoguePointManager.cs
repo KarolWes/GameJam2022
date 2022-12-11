@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 
 public class DialoguePointManager : MonoBehaviour
 {
@@ -30,7 +31,7 @@ public class DialoguePointManager : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("NPC"))
+        if (other.GameObject() == player)
         {
             if (_active)
             {

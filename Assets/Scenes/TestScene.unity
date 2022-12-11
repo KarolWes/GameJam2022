@@ -281,7 +281,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   texts:
   - "Not this feeling again\u2026 "
-  - Press R to possess a person.
+  - Press R to possess a person. Possession automatically kills them, but you obtain
+    special skills for moving forward. Kill people wisely
   self: {fileID: 127709333}
   bubble: {fileID: 310618974633564086, guid: ef6a6214ed62311418ae63dc45b5de94, type: 3}
 --- !u!1001 &163952194
