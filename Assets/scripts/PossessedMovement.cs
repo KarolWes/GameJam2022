@@ -10,7 +10,7 @@ public class PossessedMovement : PhysicsObject
     public bool _active = false;
     private Rigidbody2D _rb;
     private CapsuleCollider2D _col;
-    [SerializeField] private Dictionary<string, bool> abilities = new Dictionary<String,Boolean>();
+    // [SerializeField] private Dictionary<string, bool> abilities = new Dictionary<String,Boolean>();
     
 
     // Start is called before the first frame update

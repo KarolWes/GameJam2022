@@ -62,28 +62,29 @@ public class Possess : MonoBehaviour
 
     private void PossessFunc()
     {
-        if(!_possessing)
+        if (_inRange)
         {
-            if (_inRange)
+            if (_possessing)
             {
-                _stats.PossessionCount += 1;
-                Debug.Log("Possessed " + _candidate.name);
-                _npcPossessed = _candidate;
-                _npcController = _npcPossessed.GetComponent<PossessedMovement>();
-                _npcStats = _npcPossessed.GetComponent<Stats>();
-                _npcController.Activate();
-                _death = _npcPossessed.GetComponentInChildren<DeathScript>();
-                player.transform.position = _npcPossessed.transform.position;
-                _rend.enabled = false;
-                _inRange = false;
-                _possessing = true;
-                _candidate = null;
-                _rb.bodyType = RigidbodyType2D.Static;
-                _col.enabled = false;
-                _stats.Hp = _npcStats.Hp;
-                _stats.Type = _npcStats.Type;
-                player.GetComponentInChildren<ActivityManager>().enabled = false;
+                Release();
             }
+            _stats.PossessionCount += 1;
+            Debug.Log("Possessed " + _candidate.name);
+            _npcPossessed = _candidate;
+            _npcController = _npcPossessed.GetComponent<PossessedMovement>();
+            _npcStats = _npcPossessed.GetComponent<Stats>();
+            _npcController.Activate();
+            _death = _npcPossessed.GetComponentInChildren<DeathScript>();
+            player.transform.position = _npcPossessed.transform.position;
+            _rend.enabled = false;
+            _inRange = false;
+            _possessing = true;
+            _candidate = null;
+            _rb.bodyType = RigidbodyType2D.Static;
+            _col.enabled = false;
+            _stats.Hp = _npcStats.Hp;
+            _stats.Type = _npcStats.Type;
+            player.GetComponentInChildren<ActivityManager>().enabled = false;
         }
         else
         {
