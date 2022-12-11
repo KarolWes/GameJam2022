@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading.Tasks;
 
 public class DialoguePointManager : MonoBehaviour
 {
@@ -29,19 +30,20 @@ public class DialoguePointManager : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(transform.parent && transform.parent.gameObject != other.gameObject)
+        if (other.CompareTag("NPC"))
         {
-            Debug.Log("1");
-            if (other.CompareTag("NPC"))
+            if (_active)
             {
-                Debug.Log("2");
-                if (_active)
-                {
-                    Debug.Log("3");
-                    _active = false;
-                    DialogueManager.Instance.InvokeDialogue(player, sentence);
-                }
+                _active = false;
+                DelayedShow();
+                
             }
         }
+    }
+
+    async void DelayedShow()
+    {
+        await Task.Delay(1000);
+        DialogueManager.Instance.InvokeDialogue(player, sentence);
     }
 }
