@@ -6,6 +6,5 @@
 /UserSettings/Layouts/default-2022.dwlt
 /obj/
 /Assets/scripts/.idea
-Assembly-CSharp.csproj
-Assembly-CSharp-Karol.csproj
+*.csproj
 /UserSettings/
