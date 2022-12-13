@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -39,21 +40,79 @@ public class PhysicObjectBeta : MonoBehaviour
     void Start()
     {
         ContactFilter.useTriggers = false;
-        ContactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(LayerMask.GetMask("Default")));
+        ContactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(gameObject.layer));
         ContactFilter.useLayerMask = true;
+    }
+
+    private void Update()
+    {
+        TargetVelocity = Vector2.zero;
+        ComputeVelocity();
+    }
+
+    protected virtual void ComputeVelocity()
+    {
+        
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         Velocity += Physics2D.gravity * (gravityModifier * Time.deltaTime);
+        Velocity.x = TargetVelocity.x;
+        Grounded = false;
         Vector2 deltaPos = Velocity * Time.deltaTime;
-        Vector2 move = Vector2.up * deltaPos.y;
-        Movement(move);
+        Vector2 moveAlongGround = new Vector2(GroundNorm.y, -GroundNorm.x);
+        Vector2 move = new Vector2();
+        float tanAngle = moveAlongGround.y / moveAlongGround.x;
+        Debug.Log(tanAngle);
+        Debug.Log(Grounded);
+        move = moveAlongGround * deltaPos.x;
+        Movement(move, false, tanAngle);
+        move = Vector2.up * deltaPos.y;
+        Movement(move, true);
     }
 
-    void Movement(Vector2 move)
+    void Movement(Vector2 move, bool yMovement, float angle = 0)
     {
-        RBody.position += move;
+        var distance = move.magnitude;
+        if (distance > MinMoveDist)
+        {
+            var count = RBody.Cast(move, ContactFilter, HitBuffer, ShellRad);
+            HitBufferList.Clear();
+            for (int i = 0; i < count; i++)
+            {
+                HitBufferList.Add(HitBuffer[i]);
+            }
+            for (int i = 0; i < HitBufferList.Count; i++)
+            {
+                Vector2 currNorm = HitBufferList[i].normal;
+                if (currNorm.y > minGroundNormY)
+                {
+                    Grounded = true;
+                    if (yMovement)
+                    {
+                        GroundNorm = currNorm;
+                        currNorm.x = 0;
+                    }
+                }
+
+                float projection = Vector2.Dot(Velocity, currNorm);
+                if (projection < 0)
+                {
+                    Velocity -= projection * currNorm;
+                }
+
+                float modifiedDist = HitBufferList[i].distance-ShellRad;
+                distance = modifiedDist < distance ? modifiedDist : distance;
+                
+            }
+        }
+
+        if (!yMovement && Grounded && angle <= 1)
+        {
+            distance = 0;
+        }
+        RBody.position += move.normalized*distance;
     }
 }
