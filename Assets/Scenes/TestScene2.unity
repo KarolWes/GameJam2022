@@ -208,11 +208,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3743176038055447655, guid: 018d7bccbe675034ba7127f614ee7799, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.2
+      value: 13.76
       objectReference: {fileID: 0}
     - target: {fileID: 3743176038055447655, guid: 018d7bccbe675034ba7127f614ee7799, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.4
+      value: -2.8
       objectReference: {fileID: 0}
     - target: {fileID: 3743176038055447655, guid: 018d7bccbe675034ba7127f614ee7799, type: 3}
       propertyPath: m_LocalPosition.z
@@ -393,11 +393,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3743176038055447655, guid: 018d7bccbe675034ba7127f614ee7799, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.81
+      value: 10.22
       objectReference: {fileID: 0}
     - target: {fileID: 3743176038055447655, guid: 018d7bccbe675034ba7127f614ee7799, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2
+      value: -3.26
       objectReference: {fileID: 0}
     - target: {fileID: 3743176038055447655, guid: 018d7bccbe675034ba7127f614ee7799, type: 3}
       propertyPath: m_LocalPosition.z
@@ -452,7 +452,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8487342012688875600, guid: 27c9c0a064cfe2842a055f3843ab3360, type: 3}
       propertyPath: m_CollisionDetection
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8487342012688875601, guid: 27c9c0a064cfe2842a055f3843ab3360, type: 3}
       propertyPath: m_RootOrder
@@ -508,7 +508,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8487342012688875604, guid: 27c9c0a064cfe2842a055f3843ab3360, type: 3}
       propertyPath: minGroundNormY
-      value: 0.65
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 8487342012688875604, guid: 27c9c0a064cfe2842a055f3843ab3360, type: 3}
       propertyPath: gravityModifier

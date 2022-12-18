@@ -1,14 +1,21 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : PhysicObjectBeta
 {
     private Stats _stats;
-    private bool dir = true;
 
     protected override void ComputeVelocity()
     {
         Vector2 move = Vector2.zero;
-        move.x = Input.GetAxis("Horizontal");
+        angle *= dir;
+        
+
+        if (angle <= 1 || !Grounded)
+        {
+            move.x = Input.GetAxis("Horizontal");
+
+        }
         if (Input.GetButtonDown("Jump") && Grounded)
         {
             Velocity.y = jumpHeight;
@@ -20,8 +27,8 @@ public class PlayerMovement : PhysicObjectBeta
                 Velocity.y *= 0.5f;
             }
         }
-
         TargetVelocity = move * speed;
     }
+    
     
 }
