@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class PhysicObjectBeta : MonoBehaviour
 {
 
@@ -16,15 +18,18 @@ public class PhysicObjectBeta : MonoBehaviour
     protected float _nextjump= 0.15f;
     protected float angle;
     protected int dir = 1;
+
     protected Vector2 Velocity;
     protected Vector2 TargetVelocity;
     protected Rigidbody2D RBody;
     protected ContactFilter2D ContactFilter;
     protected RaycastHit2D[] HitBuffer = new RaycastHit2D[16];
     protected List<RaycastHit2D> HitBufferList = new List<RaycastHit2D>(16);
-    protected bool Grounded = false;
+    
     protected Vector2 GroundNorm;
+
     protected bool jumped = false;
+
     private Vector2 movement = new Vector2(1,1);
     private Vector2 speedVec;
 
@@ -32,7 +37,7 @@ public class PhysicObjectBeta : MonoBehaviour
     public float minGroundNormY = 0.65f;
 
 
-    
+
     protected void OnEnable()
     {
         RBody = GetComponent<Rigidbody2D>();
@@ -45,6 +50,7 @@ public class PhysicObjectBeta : MonoBehaviour
         ContactFilter.useTriggers = false;
         ContactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(gameObject.layer));
         ContactFilter.useLayerMask = true;
+        
     }
 
     private void Update()
@@ -64,10 +70,7 @@ public class PhysicObjectBeta : MonoBehaviour
         ComputeVelocity();
     }
 
-    protected virtual void ComputeVelocity()
-    {
-        
-    }
+    protected virtual void ComputeVelocity() {}
 
     // Update is called once per frame
     void FixedUpdate()
@@ -109,7 +112,6 @@ public class PhysicObjectBeta : MonoBehaviour
                         currNorm.x = 0;
                     }
                 }
-
                 float projection = Vector2.Dot(Velocity, currNorm);
                 if (projection < 0)
                 {
@@ -118,9 +120,7 @@ public class PhysicObjectBeta : MonoBehaviour
 
                 float modifiedDist = HitBufferList[i].distance-ShellRad;
                 distance = modifiedDist < distance ? modifiedDist : distance;
-                
             }
-        }
 
         if (yMovement ||!Grounded|| angle <= 1)
         {
@@ -134,8 +134,6 @@ public class PhysicObjectBeta : MonoBehaviour
             }
             
         }
-
-        
         
     }
 }

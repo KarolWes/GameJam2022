@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : PhysicObjectBeta
@@ -8,6 +9,7 @@ public class PlayerMovement : PhysicObjectBeta
     {
         Vector2 move = Vector2.zero;
         angle *= dir;
+
         if (angle <= 1 || !Grounded)
         {
             move.x = Input.GetAxis("Horizontal");
@@ -25,8 +27,8 @@ public class PlayerMovement : PhysicObjectBeta
                 Velocity.y *= 0.5f;
             }
         }
-
         TargetVelocity = move * speed;
     }
+    
     
 }

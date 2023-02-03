@@ -36,6 +36,12 @@ public class Dialogue : MonoBehaviour
     private void OnDestroy()
     {
         DialogueManager.OnInvokeDialogue -= DMInvokeDialogue;
+        while (_tmpBubble.Count > 0)
+        {
+            var tmp = _tmpBubble[0];
+            _tmpBubble.Remove(tmp);
+            DestroyImmediate(tmp);
+        }
     }
 
     async Task ManageBubble(Vector3 pos, string t)
@@ -45,9 +51,12 @@ public class Dialogue : MonoBehaviour
         b.GetComponentInChildren<TextMeshPro>().text = t;
         _tmpBubble.Add(b);
         await Task.Delay(timeSec*1000);
-        var toDestroy = _tmpBubble[0];
-        _tmpBubble.Remove(_tmpBubble[0]);
-        Destroy(toDestroy);
+        if (_tmpBubble.Count > 0)
+        {
+            var toDestroy = _tmpBubble[0];
+            _tmpBubble.Remove(_tmpBubble[0]);
+            DestroyImmediate(toDestroy);
+        }
         await Task.Yield();
     }
     private void DMInvokeDialogue(GameObject character, int sentence)
