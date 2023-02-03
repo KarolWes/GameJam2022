@@ -10,11 +10,12 @@ public class PhysicObjectBeta : MonoBehaviour
     [SerializeField] protected float jumpHeight = 1; // scaled to blocks
     [SerializeField] protected float jumpDelay = 0.5f;
     
-    
+    protected SpriteRenderer rend;
     protected const float MinMoveDist = 0.001f;
     protected const float ShellRad = 0.01f;
     protected float _nextjump= 0.15f;
-    
+    protected float angle;
+    protected int dir = 1;
     protected Vector2 Velocity;
     protected Vector2 TargetVelocity;
     protected Rigidbody2D RBody;
@@ -23,6 +24,7 @@ public class PhysicObjectBeta : MonoBehaviour
     protected List<RaycastHit2D> HitBufferList = new List<RaycastHit2D>(16);
     protected bool Grounded = false;
     protected Vector2 GroundNorm;
+    protected bool jumped = false;
     private Vector2 movement = new Vector2(1,1);
     private Vector2 speedVec;
 
@@ -34,6 +36,7 @@ public class PhysicObjectBeta : MonoBehaviour
     protected void OnEnable()
     {
         RBody = GetComponent<Rigidbody2D>();
+        rend = GetComponent<SpriteRenderer>();
     }
 
     // Start is called before the first frame update
@@ -46,6 +49,17 @@ public class PhysicObjectBeta : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKey(KeyCode.A))
+        {
+            dir = -1;
+            rend.flipX = true;
+        }
+
+        if (Input.GetKey(KeyCode.D))
+        {
+            dir = 1;
+            rend.flipX = false;
+        }
         TargetVelocity = Vector2.zero;
         ComputeVelocity();
     }
@@ -64,16 +78,14 @@ public class PhysicObjectBeta : MonoBehaviour
         Vector2 deltaPos = Velocity * Time.deltaTime;
         Vector2 moveAlongGround = new Vector2(GroundNorm.y, -GroundNorm.x);
         Vector2 move = new Vector2();
-        float tanAngle = moveAlongGround.y / moveAlongGround.x;
-        Debug.Log(tanAngle);
-        Debug.Log(Grounded);
+        angle = moveAlongGround.y / moveAlongGround.x;
         move = moveAlongGround * deltaPos.x;
-        Movement(move, false, tanAngle);
+        Movement(move, false, deltaPos);
         move = Vector2.up * deltaPos.y;
-        Movement(move, true);
+        Movement(move, true, deltaPos);
     }
 
-    void Movement(Vector2 move, bool yMovement, float angle = 0)
+    void Movement(Vector2 move, bool yMovement, Vector2 clearMove)
     {
         var distance = move.magnitude;
         if (distance > MinMoveDist)
@@ -90,6 +102,7 @@ public class PhysicObjectBeta : MonoBehaviour
                 if (currNorm.y > minGroundNormY)
                 {
                     Grounded = true;
+                    jumped = false;
                     if (yMovement)
                     {
                         GroundNorm = currNorm;
@@ -109,10 +122,20 @@ public class PhysicObjectBeta : MonoBehaviour
             }
         }
 
-        if (!yMovement && Grounded && angle <= 1)
+        if (yMovement ||!Grounded|| angle <= 1)
         {
-            distance = 0;
+            if (jumped)
+            {
+                RBody.position += clearMove.normalized*distance;
+            }
+            else
+            {
+                RBody.position += move.normalized*distance;
+            }
+            
         }
-        RBody.position += move.normalized*distance;
+
+        
+        
     }
 }
