@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
 using Unity.VisualScripting;
@@ -27,8 +24,8 @@ public class DialoguePointManager : MonoBehaviour
     {
         
     }
-    
-    
+
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.GameObject() == player)
