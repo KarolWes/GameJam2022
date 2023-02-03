@@ -8,9 +8,9 @@ public class PlayerMovement : PhysicObjectBeta
     protected override void ComputeVelocity()
     {
         Vector2 move = Vector2.zero;
-        angle *= dir;
+        Angle *= Dir;
 
-        if (angle <= 1 || !Grounded)
+        if (Angle <= 1 || !Grounded)
         {
             move.x = Input.GetAxis("Horizontal");
 
@@ -18,7 +18,7 @@ public class PlayerMovement : PhysicObjectBeta
         if (Input.GetButtonDown("Jump") && Grounded)
         {
             Velocity.y = jumpHeight;
-            jumped = true;
+            Jumped = true;
         }
         else if (Input.GetButtonUp("Jump"))
         {
