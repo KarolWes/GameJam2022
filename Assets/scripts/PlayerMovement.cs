@@ -9,7 +9,6 @@ public class PlayerMovement : PhysicObjectBeta
     {
         Vector2 move = Vector2.zero;
         angle *= dir;
-        
 
         if (angle <= 1 || !Grounded)
         {
@@ -19,6 +18,7 @@ public class PlayerMovement : PhysicObjectBeta
         if (Input.GetButtonDown("Jump") && Grounded)
         {
             Velocity.y = jumpHeight;
+            jumped = true;
         }
         else if (Input.GetButtonUp("Jump"))
         {

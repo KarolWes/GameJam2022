@@ -12,16 +12,13 @@ public class PhysicObjectBeta : MonoBehaviour
     [SerializeField] protected float jumpHeight = 1; // scaled to blocks
     [SerializeField] protected float jumpDelay = 0.5f;
     
-    
-    
+    protected SpriteRenderer rend;
     protected const float MinMoveDist = 0.001f;
     protected const float ShellRad = 0.01f;
     protected float _nextjump= 0.15f;
-    protected float angle = 0;
+    protected float angle;
     protected int dir = 1;
-    protected bool Grounded = false;
-    
-    protected SpriteRenderer rend;
+
     protected Vector2 Velocity;
     protected Vector2 TargetVelocity;
     protected Rigidbody2D RBody;
@@ -30,6 +27,8 @@ public class PhysicObjectBeta : MonoBehaviour
     protected List<RaycastHit2D> HitBufferList = new List<RaycastHit2D>(16);
     
     protected Vector2 GroundNorm;
+
+    protected bool jumped = false;
 
     private Vector2 movement = new Vector2(1,1);
     private Vector2 speedVec;
@@ -89,7 +88,7 @@ public class PhysicObjectBeta : MonoBehaviour
         Movement(move, true, deltaPos);
     }
 
-    void Movement(Vector2 move, bool yMovement, Vector2 moveClear)
+    void Movement(Vector2 move, bool yMovement, Vector2 clearMove)
     {
         var distance = move.magnitude;
         if (distance > MinMoveDist)
@@ -106,6 +105,7 @@ public class PhysicObjectBeta : MonoBehaviour
                 if (currNorm.y > minGroundNormY)
                 {
                     Grounded = true;
+                    jumped = false;
                     if (yMovement)
                     {
                         GroundNorm = currNorm;
@@ -122,15 +122,17 @@ public class PhysicObjectBeta : MonoBehaviour
                 distance = modifiedDist < distance ? modifiedDist : distance;
             }
 
+        if (yMovement ||!Grounded|| angle <= 1)
+        {
+            if (jumped)
+            {
+                RBody.position += clearMove.normalized*distance;
+            }
+            else
+            {
+                RBody.position += move.normalized*distance;
+            }
             
-        }
-        if (Grounded)
-        {
-             RBody.position += move.normalized*distance;   
-        }
-        else
-        {
-            RBody.position += moveClear.normalized*distance;   
         }
         
     }
