@@ -33,7 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8487342012688875601}
-  m_RootOrder: -1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &345838599
 MonoBehaviour:
@@ -214,11 +214,11 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8487342012688875601}
-  m_RootOrder: -1
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &455593277
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -235,7 +235,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &455593276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,7 +281,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8487342012688875601}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &1453356163
 Camera:
@@ -379,7 +379,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8487342012688875601}
-  m_RootOrder: -1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &1649920217
 CircleCollider2D:
@@ -433,6 +433,7 @@ MonoBehaviour:
   activityDelay: 1
   self: {fileID: 8487342012688875612}
   isPlayer: 1
+  endTitle: {fileID: 0}
 --- !u!1 &8487342012688875612
 GameObject:
   m_ObjectHideFlags: 0
@@ -469,12 +470,12 @@ Transform:
   m_LocalScale: {x: 0.15, y: 0.15, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4446448647468051973}
   - {fileID: 1453356164}
   - {fileID: 8487342013397589006}
   - {fileID: 345838597}
   - {fileID: 1649920214}
   - {fileID: 455593275}
+  - {fileID: 4446448647468051973}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -579,11 +580,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02abd2314489ea0418fd52d4d8397d94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  jumpSpeed: 14
+  gravityModifier: 0.75
+  minGroundNormY: 0.4
+  weight: 5
+  speed: 2
+  jumpHeight: 4
   jumpDelay: 0.5
-  gravityModifier: 3.5
-  minGroundNormY: 0
 --- !u!114 &2111801839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -600,7 +602,7 @@ MonoBehaviour:
   _hp: 1
 --- !u!95 &127709356
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -617,7 +619,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &127709340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -682,7 +684,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8487342012688875601}
-  m_RootOrder: -1
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &8487342013397588993
 CircleCollider2D:
@@ -736,12 +738,12 @@ MonoBehaviour:
   size: 1
   possessionDelay: 0.5
   player: {fileID: 8487342012688875612}
+  possSound: {fileID: 8300000, guid: 420bb3bfd7a7ac04195a775158a4c51c, type: 3}
 --- !u!1001 &8487342012598922742
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    serializedVersion: 2
     m_TransformParent: {fileID: 8487342012688875601}
     m_Modifications:
     - target: {fileID: -5993072956748756340, guid: f37948fe9fa185c4ea2f626e5ce452df, type: 3}
@@ -826,7 +828,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5223592737003815923, guid: f37948fe9fa185c4ea2f626e5ce452df, type: 3}
       propertyPath: m_RootOrder
-      value: -1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5223592737003815923, guid: f37948fe9fa185c4ea2f626e5ce452df, type: 3}
       propertyPath: m_LocalScale.x
@@ -897,7 +899,6 @@ PrefabInstance:
       value: 0.33837503
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 6142788090460401629, guid: f37948fe9fa185c4ea2f626e5ce452df, type: 3}
 --- !u!4 &4446448647468051973 stripped
 Transform:

@@ -49,6 +49,11 @@ public class PhysicObjectBeta : MonoBehaviour
 
     private void Update()
     {
+        UpdateFunction();
+    }
+
+    protected virtual void UpdateFunction()
+    {
         if (Input.GetKey(KeyCode.A))
         {
             Dir = -1;
