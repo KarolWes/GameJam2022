@@ -88,12 +88,13 @@ public class Possess : MonoBehaviour
             DialogueManager.Instance.InvokeDialogue(_npcPossessed, 2);
             _death = _npcPossessed.GetComponentInChildren<DeathScript>();
             player.transform.position = _npcPossessed.transform.position;
-            _rend.enabled = false;
             _inRange = false;
             _possessing = true;
             _candidate = null;
+            _rb.simulated = false;
             _rb.bodyType = RigidbodyType2D.Static;
-            _col.enabled = false;
+            //_col.enabled = false;
+            _rend.enabled = false;
             _stats.Hp = _npcStats.Hp;
             _stats.Type = _npcStats.Type;
             player.GetComponentInChildren<ActivityManager>().enabled = false;
@@ -113,18 +114,19 @@ public class Possess : MonoBehaviour
         {
             _possessing = false;
             var audio = _npcPossessed.GetComponent<AudioSource>();
-            _col.enabled = true;
-            player.transform.position += new Vector3(.3f, .3f);
-            _rend.enabled = true;
-            _rb.bodyType = RigidbodyType2D.Kinematic;
+            var tmpPos = _npcPossessed.transform.position;
             _npcController.Activate();
             _npcController = null;
             _npcPossessed = null;
             player.GetComponentInChildren<ActivityManager>().enabled = true;
-            transform.position = new Vector3(0, 0, 0);
-            _death.Kill(audio);
+            //_death.Kill(audio);
             _death = null;
-
+            
+            //_col.enabled = true;
+            _rb.bodyType = RigidbodyType2D.Kinematic;
+            _rb.simulated = true;
+            player.transform.position = tmpPos;
+            _rend.enabled = true;
         }
         
         _stats.Hp = 1;

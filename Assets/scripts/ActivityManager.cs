@@ -87,6 +87,7 @@ public class ActivityManager : MonoBehaviour
             if(!other.gameObject.CompareTag("World"))
             {
                 _candidate = other.gameObject;
+                print(_candidate.name);
             }
         }
     }
