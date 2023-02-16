@@ -31,6 +31,7 @@ public class ActivateByItem : MonoBehaviour
                 if (gameObject.CompareTag("Door"))
                 {
                     gameObject.GetComponent<DoorController>().Open = true;
+                    Debug.Log ("opened");
                 }
                 
                 return true;

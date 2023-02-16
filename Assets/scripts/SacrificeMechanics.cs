@@ -35,7 +35,7 @@ public class SacrificeMechanics : MonoBehaviour
         DialogueManager.Instance.InvokeDialogue(player, 6);
         var npc = _possess.NpcPossessed;
         _possess.Release();
-        npc.GetComponentInChildren<DeathScript>().Kill(gameObject.GetComponent<AudioSource>());
+        npc.GetComponentInChildren<DeathScript>().Kill();
     }
     
     private void OnTriggerEnter2D(Collider2D other)

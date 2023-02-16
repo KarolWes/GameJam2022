@@ -16,7 +16,6 @@ public class PossessedMovement : PlayerMovement
         ContactFilter.useTriggers = false;
         ContactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(LayerMask.GetMask("Default")));
         ContactFilter.useLayerMask = true;
-        Dir = -1;
     }
     
     

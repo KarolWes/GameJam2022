@@ -118,11 +118,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f67b39922f7bcc4697c11737e66e074, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
-  jumpSpeed: 8
-  jumpDelay: 0.5
   gravityModifier: 0.5
   minGroundNormY: 0
+  weight: 5
+  speed: 1
+  jumpHeight: 1
+  jumpDelay: 0.5
+  Dir: 1
   _active: 0
 --- !u!82 &1306561647
 AudioSource:
@@ -393,11 +395,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f67b39922f7bcc4697c11737e66e074, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
-  jumpSpeed: 7
-  jumpDelay: 0.5
   gravityModifier: 1.2
   minGroundNormY: 0.4
+  weight: 5
+  speed: 3
+  jumpHeight: 7
+  jumpDelay: 0.5
+  Dir: -1
   _active: 0
 --- !u!82 &1749825039
 AudioSource:
