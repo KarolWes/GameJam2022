@@ -534,7 +534,7 @@ GameObject:
   - component: {fileID: 5175704334464957339}
   m_Layer: 0
   m_Name: TouchRadius
-  m_TagString: NPC
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -716,7 +716,7 @@ GameObject:
   - component: {fileID: 5175704335567882569}
   m_Layer: 0
   m_Name: ActivityRange
-  m_TagString: NPC
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

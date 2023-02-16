@@ -12,6 +12,7 @@ public class ActivityManager : MonoBehaviour
     private GameObject _candidate;
     private Stats _stats;
     [SerializeField] private bool isPlayer = false;
+    // that shouldn't be here \/
     [SerializeField] private GameObject endTitle;
 
     
@@ -53,6 +54,7 @@ public class ActivityManager : MonoBehaviour
                     {
                         if (_candidate.GetComponent<DoorController>().Open)
                         {
+                            Debug.Log ("END");
                             endTitle.GetComponent<SpriteRenderer>().enabled = true;
                             endTitle.transform.position =
                                 self.GetComponentInChildren<CameraManager>().transform.position;
@@ -61,7 +63,7 @@ public class ActivityManager : MonoBehaviour
                         {
                             if (!isPlayer)
                             {
-                                Debug.Log("opening");
+                                // true if player has an object, that activates the door
                                 Debug.Log(_candidate.GetComponent<ActivateByItem>().Activate(_stats.Inventory));
                             }
                         }
