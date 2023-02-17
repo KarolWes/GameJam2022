@@ -62,6 +62,7 @@
      <Compile Include="Assets\scripts\PhysicsObject.cs" />
      <Compile Include="Assets\scripts\EndGameManager.cs" />
      <Compile Include="Assets\scripts\PlayerMovement.cs" />
+     <Compile Include="Assets\scripts\SoundContainer.cs" />
      <Folder Include="Assets" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />

@@ -10,7 +10,7 @@ public class DeathScript : MonoBehaviour
     private float _nextHit = 0.15f;
     private float _hitDelay = 1.0f;
     private Possess _possess;
-    private AudioSource audio;
+    private AudioSource _audio;
 
     [FormerlySerializedAs("player")] [SerializeField] private GameObject self;
     [SerializeField] private GameObject possessionManager;
@@ -26,7 +26,7 @@ public class DeathScript : MonoBehaviour
     {
         _stats = self.GetComponent<Stats>();
         _stats.StartPos = self.transform.position;
-        
+        _audio = self.GetComponentInChildren<AudioSource> ();
     }
 
     // Update is called once per frame
@@ -42,7 +42,7 @@ public class DeathScript : MonoBehaviour
             if (other.CompareTag("Fire"))
             {
                 _isTouching = true;
-                audio = other.gameObject.GetComponent<AudioSource> ();
+                _audio.clip = other.gameObject.GetComponent<SoundContainer>().Sound;
             }
         }
     }
@@ -61,10 +61,10 @@ public class DeathScript : MonoBehaviour
     }
 
     public void Kill(AudioSource audio) {
-        var orgAudio = this.audio;
-        this.audio = audio;
+        var orgAudio = _audio;
+        _audio = audio;
         Kill();
-        this.audio = orgAudio;
+        _audio = orgAudio;
     }
     public void Kill()
     {
@@ -86,7 +86,7 @@ public class DeathScript : MonoBehaviour
         }
 
         //death animation?
-        StartCoroutine(UntilPlays(audio));
+        StartCoroutine(UntilPlays(_audio));
     }
 
     IEnumerator UntilPlays(AudioSource audio){
