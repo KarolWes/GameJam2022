@@ -12,10 +12,8 @@ public class ActivityManager : MonoBehaviour
     private GameObject _candidate;
     private Stats _stats;
     [SerializeField] private bool isPlayer = false;
-    // that shouldn't be here \/
-    [SerializeField] private GameObject endTitle;
 
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,9 +53,7 @@ public class ActivityManager : MonoBehaviour
                         if (_candidate.GetComponent<DoorController>().Open)
                         {
                             Debug.Log ("END");
-                            endTitle.GetComponent<SpriteRenderer>().enabled = true;
-                            endTitle.transform.position =
-                                self.GetComponentInChildren<CameraManager>().transform.position;
+                            GameManager.Instance.UpdateGameState (GameState.End);
                         }
                         else
                         {

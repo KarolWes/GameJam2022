@@ -217,7 +217,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 2147483647
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -336,7 +336,6 @@ MonoBehaviour:
   activityDelay: 1
   self: {fileID: 8487342012688875612}
   isPlayer: 1
-  endTitle: {fileID: 0}
 --- !u!1 &8487342012688875612
 GameObject:
   m_ObjectHideFlags: 0

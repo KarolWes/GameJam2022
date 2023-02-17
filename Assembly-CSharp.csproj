@@ -53,12 +53,14 @@
      <Compile Include="Assets\scripts\DoorController.cs" />
      <Compile Include="Assets\scripts\ActivateByItem.cs" />
      <Compile Include="Assets\scripts\Dialogue.cs" />
+     <Compile Include="Assets\scripts\GameManager.cs" />
      <Compile Include="Assets\scripts\Stats.cs" />
      <Compile Include="Assets\scripts\DeathScript.cs" />
      <Compile Include="Assets\scripts\DialoguePointManager.cs" />
      <Compile Include="Assets\scripts\Possess.cs" />
      <Compile Include="Assets\scripts\CameraManager.cs" />
      <Compile Include="Assets\scripts\PhysicsObject.cs" />
+     <Compile Include="Assets\scripts\EndGameManager.cs" />
      <Compile Include="Assets\scripts\PlayerMovement.cs" />
      <Folder Include="Assets" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
