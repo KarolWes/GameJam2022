@@ -60,6 +60,12 @@ public class DeathScript : MonoBehaviour
         }
     }
 
+    public void Kill(AudioSource audio) {
+        var orgAudio = this.audio;
+        this.audio = audio;
+        Kill();
+        this.audio = orgAudio;
+    }
     public void Kill()
     {
         print (self.name);

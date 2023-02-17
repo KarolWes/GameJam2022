@@ -4,9 +4,11 @@ public class SacrificeMechanics : MonoBehaviour
 {
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject possessionManager;
+    [SerializeField] private AudioClip sacrificeAudio;
     private Possess _possess;
     private bool _ready = false;
-    
+    private AudioSource audioS;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +37,10 @@ public class SacrificeMechanics : MonoBehaviour
         DialogueManager.Instance.InvokeDialogue(player, 6);
         var npc = _possess.NpcPossessed;
         _possess.Release();
-        npc.GetComponentInChildren<DeathScript>().Kill();
+        audioS = player.GetComponent<AudioSource> ();
+        audioS.clip = sacrificeAudio;
+        audioS.playOnAwake = false;
+        npc.GetComponentInChildren<DeathScript>().Kill(audioS);
     }
     
     private void OnTriggerEnter2D(Collider2D other)

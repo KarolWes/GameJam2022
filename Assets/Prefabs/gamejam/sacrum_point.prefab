@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2866613862900872382}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &2866613862225406226
 BoxCollider2D:
@@ -73,6 +73,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   possessionManager: {fileID: 0}
+  sacrificeAudio: {fileID: 8300000, guid: f3414459ca557ba4f966e28304222af2, type: 3}
 --- !u!1 &2866613862900872378
 GameObject:
   m_ObjectHideFlags: 0
@@ -99,12 +100,12 @@ Transform:
   m_GameObject: {fileID: 2866613862900872378}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 21.15156, y: -5.27, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.55248624, y: 1.2987013, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2866613862225406224}
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2866613862900872381
 SpriteRenderer:
@@ -146,7 +147,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 7daba8699ad0758429fd61a08945d2c7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
