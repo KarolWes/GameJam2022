@@ -30,7 +30,7 @@ public class ActivityManager : MonoBehaviour
     void Update()
     {
         
-        if ( isPlayer || _controller._active)
+        if ( isPlayer || _controller.active)
         {
             
             if (Input.GetKey(KeyCode.E) && Time.time > _nextActivity)

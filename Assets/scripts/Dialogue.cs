@@ -8,9 +8,7 @@ using UnityEngine;
 public class Dialogue : MonoBehaviour
 {
     [SerializeField] private List<String> texts;
-
     [SerializeField] private GameObject self;
-
     [SerializeField] private GameObject bubble;
     [SerializeField] private int timeSec = 2;
 

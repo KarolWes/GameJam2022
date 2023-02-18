@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PossessedMovement : PlayerMovement
 {
     // Start is called before the first frame update
-    public bool _active = false;
+    [FormerlySerializedAs ("_active")] public bool active = false;
 
     // [SerializeField] private Dictionary<string, bool> abilities = new Dictionary<String,Boolean>();
     
@@ -24,12 +25,12 @@ public class PossessedMovement : PlayerMovement
 
     public void Activate()
     {
-        _active ^= true;
+        active ^= true;
     }
     
     protected override void ComputeVelocity()
     {
-        if (_active)
+        if (active)
         {
             base.ComputeVelocity();
         }
@@ -37,7 +38,7 @@ public class PossessedMovement : PlayerMovement
 
     protected override void UpdateFunction()
     {
-        if (_active)
+        if (active)
         {
             if (Input.GetKey(KeyCode.A))
             {
