@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Debug = System.Diagnostics.Debug;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -20,13 +21,31 @@ public class DialogueManager : MonoBehaviour
     }
 
     private void Update() {
-        if (_dialogList.Count > 0)
+        GameObject lastChar = null;
+        Dialogue charDia = null;
+        List<Tuple<GameObject, int>> toRemove = new List<Tuple<GameObject, int>> ();
+        foreach (var tmp in _dialogList)
         {
-            var tmp = _dialogList[0];
             var character = tmp.Item1;
+            if (character != lastChar)
+            {
+                charDia = character.GetComponent<Dialogue> ();
+                lastChar = character;
+            }
             var sentence = tmp.Item2;
-            _dialogList.Remove (tmp);
-            OnInvokeDialogue?.Invoke(character, sentence);
+
+            Debug.Assert (charDia != null, nameof(charDia) + " != null");
+            if (!charDia.busy)
+            {
+                charDia.busy = true;
+                toRemove.Add (tmp);
+                OnInvokeDialogue?.Invoke (character, sentence);
+            }
+        }
+
+        foreach (var garbage in toRemove)
+        {
+            _dialogList.Remove (garbage); 
         }
     }
 }
