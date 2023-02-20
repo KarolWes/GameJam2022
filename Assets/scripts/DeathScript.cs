@@ -10,6 +10,7 @@ public class DeathScript : MonoBehaviour
     private float _nextHit = 0.15f;
     private float _hitDelay = 1.0f;
     private Possess _possess;
+    private AudioSource _audio;
 
     [FormerlySerializedAs("player")] [SerializeField] private GameObject self;
     [SerializeField] private GameObject possessionManager;
@@ -23,13 +24,9 @@ public class DeathScript : MonoBehaviour
 
     private void OnEnable()
     {
-        if (isPlayer)
-        {
-            _possess = possessionManager.GetComponent<Possess>();
-        }
         _stats = self.GetComponent<Stats>();
         _stats.StartPos = self.transform.position;
-        
+        _audio = self.GetComponentInChildren<AudioSource> ();
     }
 
     // Update is called once per frame
@@ -38,13 +35,14 @@ public class DeathScript : MonoBehaviour
         Hurt();
     }
     
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         if(transform.parent && transform.parent.gameObject != other.gameObject)
         {
             if (other.CompareTag("Fire"))
             {
                 _isTouching = true;
+                _audio.clip = other.gameObject.GetComponent<SoundContainer>().Sound;
             }
         }
     }
@@ -57,13 +55,20 @@ public class DeathScript : MonoBehaviour
             _nextHit = Time.time + _hitDelay;
             if (_stats.Hp <= 0)
             {
-                Kill(gameObject.GetComponent<AudioSource>());
+                Kill();
             }
         }
     }
 
-    public void Kill(AudioSource audio)
+    public void Kill(AudioSource audio) {
+        var orgAudio = _audio;
+        _audio = audio;
+        Kill();
+        _audio = orgAudio;
+    }
+    public void Kill()
     {
+        print (self.name);
         DialogueManager.Instance.InvokeDialogue(self, 0);
         if (isPlayer)
         {
@@ -72,15 +77,16 @@ public class DeathScript : MonoBehaviour
         else
         {
             self.GetComponent<PossessedMovement>().enabled = false;
+            _possess = FindObjectOfType<Possess> ();
         }
         gameObject.GetComponent<Collider2D>().enabled = false;
-        if (self.name == "Player")
+        if (self.name != "Player")
         {
             _possess.Release();
         }
 
         //death animation?
-        StartCoroutine(UntilPlays(audio));
+        StartCoroutine(UntilPlays(_audio));
     }
 
     IEnumerator UntilPlays(AudioSource audio){

@@ -8,13 +8,14 @@ using UnityEngine;
 public class Dialogue : MonoBehaviour
 {
     [SerializeField] private List<String> texts;
-
     [SerializeField] private GameObject self;
-
     [SerializeField] private GameObject bubble;
     [SerializeField] private int timeSec = 2;
+    
 
     private List<GameObject> _tmpBubble;
+
+    public bool busy = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -65,7 +66,7 @@ public class Dialogue : MonoBehaviour
         {
             if (sentence < texts.Count)
             {
-                var pos = self.transform.position;
+                
                 foreach (var bu in _tmpBubble)
                 {
                     Destroy(bu);
@@ -90,16 +91,19 @@ public class Dialogue : MonoBehaviour
                     }
                 }
                 textTmp.Add(tmp);
-                Show(textTmp, pos);
+                Show(textTmp);
             }
         }
     }
 
-    private async void Show(List<String> textTmp, Vector3 pos)
+    private async void Show(List<String> textTmp)
     {
         foreach(var t in textTmp)
         {
+            var pos = self.transform.position;
             await ManageBubble(pos,t);
         }
+
+        busy = false;
     }
 }

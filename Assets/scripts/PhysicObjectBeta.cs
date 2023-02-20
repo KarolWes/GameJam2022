@@ -26,7 +26,7 @@ public class PhysicObjectBeta : MonoBehaviour
     protected Vector2 GroundNorm;
     protected bool Grounded = false;
     protected bool Jumped = false;
-    protected int Dir = 1;
+    [SerializeField] protected int Dir = 1;
     protected float NextJump= 0.15f;
     protected float Angle;
     private Vector2 _movement = new Vector2(1,1);
@@ -48,6 +48,11 @@ public class PhysicObjectBeta : MonoBehaviour
     }
 
     private void Update()
+    {
+        UpdateFunction();
+    }
+
+    protected virtual void UpdateFunction()
     {
         if (Input.GetKey(KeyCode.A))
         {

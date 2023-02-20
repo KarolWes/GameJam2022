@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5468865067433724839}
   - component: {fileID: 2431714487044504857}
   - component: {fileID: 3608522083184723445}
+  - component: {fileID: 7945447440493804696}
   m_Layer: 6
   m_Name: obs_flame
   m_TagString: Fire
@@ -31,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2431714487044504857
 SpriteRenderer:
@@ -111,3 +112,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.86, y: 1.21}
   m_EdgeRadius: 0
+--- !u!114 &7945447440493804696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4158403819046835777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13915a33fda357b4ca488dd63d0f1983, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: {fileID: 8300000, guid: 3a3c4d084de60a8468f97774647fa4e6, type: 3}

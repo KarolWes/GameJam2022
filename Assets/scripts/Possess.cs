@@ -6,6 +6,9 @@ public class Possess : MonoBehaviour
 {
     [SerializeField] private float size = 1.0f;
     [SerializeField] private float possessionDelay = 0.5f;
+    [SerializeField] private GameObject player;
+    [SerializeField] private AudioClip possSound;
+    
     private bool _inRange = false;
     private bool _possessing = false;
     private bool _possessionCommand = false;
@@ -22,9 +25,7 @@ public class Possess : MonoBehaviour
     private Stats _stats;
     private Stats _npcStats;
 
-    [SerializeField] private GameObject player;
-
-    [SerializeField] private AudioClip possSound;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -78,7 +79,6 @@ public class Possess : MonoBehaviour
                 Release();
             }
 
-            
             _stats.PossessionCount += 1;
             Debug.Log("Possessed " + _candidate.name);
             _npcPossessed = _candidate;
@@ -88,15 +88,17 @@ public class Possess : MonoBehaviour
             DialogueManager.Instance.InvokeDialogue(_npcPossessed, 2);
             _death = _npcPossessed.GetComponentInChildren<DeathScript>();
             player.transform.position = _npcPossessed.transform.position;
-            _rend.enabled = false;
             _inRange = false;
             _possessing = true;
             _candidate = null;
+            _rb.simulated = false;
             _rb.bodyType = RigidbodyType2D.Static;
-            _col.enabled = false;
+            //_col.enabled = false;
+            _rend.enabled = false;
             _stats.Hp = _npcStats.Hp;
             _stats.Type = _npcStats.Type;
             player.GetComponentInChildren<ActivityManager>().enabled = false;
+            
         }
         else
         {
@@ -111,18 +113,20 @@ public class Possess : MonoBehaviour
         if (_npcController != null)
         {
             _possessing = false;
-            _npcController.Activate();
             var audio = _npcPossessed.GetComponent<AudioSource>();
+            var tmpPos = _npcPossessed.transform.position;
+            _npcController.Activate();
             _npcController = null;
             _npcPossessed = null;
-            _rb.bodyType = RigidbodyType2D.Kinematic;
-            _col.enabled = true;
-            player.transform.position += new Vector3(0, .1f);
-            _rend.enabled = true;
             player.GetComponentInChildren<ActivityManager>().enabled = true;
-            _death.Kill(audio);
+            //_death.Kill(audio);
             _death = null;
-
+            
+            //_col.enabled = true;
+            _rb.bodyType = RigidbodyType2D.Kinematic;
+            _rb.simulated = true;
+            player.transform.position = tmpPos;
+            _rend.enabled = true;
         }
         
         _stats.Hp = 1;

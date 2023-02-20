@@ -28,7 +28,7 @@ public class DialoguePointManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.GameObject() == player)
+        if (other.GameObject() == player || (other.gameObject.CompareTag ("NPC") && other.gameObject.GetComponent<PossessedMovement> ().active))
         {
             if (_active)
             {

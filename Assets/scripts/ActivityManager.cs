@@ -12,9 +12,8 @@ public class ActivityManager : MonoBehaviour
     private GameObject _candidate;
     private Stats _stats;
     [SerializeField] private bool isPlayer = false;
-    [SerializeField] private GameObject endTitle;
 
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +30,7 @@ public class ActivityManager : MonoBehaviour
     void Update()
     {
         
-        if ( isPlayer || _controller._active)
+        if ( isPlayer || _controller.active)
         {
             
             if (Input.GetKey(KeyCode.E) && Time.time > _nextActivity)
@@ -53,15 +52,14 @@ public class ActivityManager : MonoBehaviour
                     {
                         if (_candidate.GetComponent<DoorController>().Open)
                         {
-                            endTitle.GetComponent<SpriteRenderer>().enabled = true;
-                            endTitle.transform.position =
-                                self.GetComponentInChildren<CameraManager>().transform.position;
+                            Debug.Log ("END");
+                            GameManager.Instance.UpdateGameState (GameState.End);
                         }
                         else
                         {
                             if (!isPlayer)
                             {
-                                Debug.Log("opening");
+                                // true if player has an object, that activates the door
                                 Debug.Log(_candidate.GetComponent<ActivateByItem>().Activate(_stats.Inventory));
                             }
                         }
@@ -87,6 +85,7 @@ public class ActivityManager : MonoBehaviour
             if(!other.gameObject.CompareTag("World"))
             {
                 _candidate = other.gameObject;
+                print(_candidate.name);
             }
         }
     }

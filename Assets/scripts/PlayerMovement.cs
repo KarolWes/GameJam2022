@@ -29,6 +29,5 @@ public class PlayerMovement : PhysicObjectBeta
         }
         TargetVelocity = move * speed;
     }
-    
-    
+
 }

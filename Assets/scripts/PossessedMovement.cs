@@ -1,17 +1,13 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class PossessedMovement : PhysicsObject
+public class PossessedMovement : PlayerMovement
 {
     // Start is called before the first frame update
-    protected Vector2 Pos;
-    private Stats _stats;
-    public bool _active = false;
-    private Rigidbody2D _rb;
-    private CapsuleCollider2D _col;
+    [FormerlySerializedAs ("_active")] public bool active = false;
 
-    private bool dir = true;
     // [SerializeField] private Dictionary<string, bool> abilities = new Dictionary<String,Boolean>();
     
 
@@ -21,7 +17,6 @@ public class PossessedMovement : PhysicsObject
         ContactFilter.useTriggers = false;
         ContactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(LayerMask.GetMask("Default")));
         ContactFilter.useLayerMask = true;
-        
     }
     
     
@@ -30,40 +25,34 @@ public class PossessedMovement : PhysicsObject
 
     public void Activate()
     {
-        _active ^= true;
+        active ^= true;
     }
     
     protected override void ComputeVelocity()
     {
-        if (_active)
+        if (active)
         {
-            Vector2 move = Vector2.zero;
-            move.x = Input.GetAxis("Horizontal"); // arrows or a-d
-            if (move.x < 0 && dir)
+            base.ComputeVelocity();
+        }
+    }
+
+    protected override void UpdateFunction()
+    {
+        if (active)
+        {
+            if (Input.GetKey(KeyCode.A))
             {
-                gameObject.GetComponent<SpriteRenderer>().flipX = false;
-                dir = false;
+                Dir = -1;
+                Rend.flipX = false;
             }
 
-            if (move.x > 0 && !dir)
+            if (Input.GetKey(KeyCode.D))
             {
-                gameObject.GetComponent<SpriteRenderer>().flipX = true;
-                dir = true;
+                Dir = 1;
+                Rend.flipX = true;
             }
-            if (Input.GetButtonDown("Jump") && Grounded && Time.time > _nextjump) // space or w
-            {
-                Velocity.y = jumpSpeed;
-                _nextjump = Time.time + jumpDelay;
-            }
-            else if (Input.GetButtonUp("Jump"))
-            {
-                if (Velocity.y > 0)
-                {
-                    Velocity.y = Velocity.y * .5f;
-                }
-            }
-    
-            TargetVelocity = move * speed;
+            TargetVelocity = Vector2.zero;
+            ComputeVelocity();
         }
     }
 }
